@@ -1,2 +1,18 @@
 # pccdpack_inpe
  
+## Introduction
+
+The pccdpack_inpe repository has a set of IRAF routines to polarimetric reduction of data obtained using the IAGPOL polarimeter. It is heavily based on the original pccdpack package developed by Antonio Pereyra.
+
+## Developers
+
+Many routines were originally written by Antonio Pereyra with the collaboration of Antonio Mario Magalhaes.
+
+Development at INPE were done by:
+Claudia Vilega Rodrigues
+Victor de Souza Magalhães
+Karleyne M. G. de Souza
+
+## Versioning
+
+2022-02-04 - First version in the github.
