@@ -1,0 +1,36 @@
+##
+##	Uso do programa estat direto do cl.
+##
+
+procedure clestat (imagem)
+
+string	imagem		{"", prompt="Imagem a ser usada como referencia"}
+
+
+begin
+bool faz
+string lixo, temp,temp3
+faz = yes
+
+
+while(faz==yes){
+	temp = mktemp("tmp$clestat")
+	delete "clestat.dao"
+	display(image=imagem, frame=1)
+	print("Aponte com <a> o par inferior e depois o superior para diversas estrelas")
+	temp3 = mktemp("tmp$clestat")
+	unlearn daoedit
+	#print(line1 > temp3)
+	#type(temp3)
+	fitskypars.annulus = 60
+	fitskypars.dannulus = 10
+	daoedit(imagem,> temp3//"")
+	type temp3//""
+	copy(temp3, "clestat.dao")
+	delete estat.log
+	estat_cl
+	print("refaz o clestat?")
+	lixo = scan(faz)
+}
+#!open -a textedit estat.log
+end

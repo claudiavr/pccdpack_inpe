@@ -1,0 +1,75 @@
+! Programa estat_cl escrito em 22/06/2011
+! Para ser usado de dentro da rotina clestat.
+
+program estat_cl
+implicit real (v)
+real coordsx(1000),coordsy(1000),ceu(1000),moffat(1000),enclosed(1000),direto(1000),difx(1000),dify(1000)
+real somaceu,somamoff,somaencl,somadir, somadifx,somadify, somadesvx, somadesvy
+integer file_in,file_out,cont,error
+
+open(unit=file_in,file="clestat.imex",action='read',status='old',iostat=error)
+i=0
+cont=0
+somaceu=0
+somamoff=0
+somadir=0
+somaencl = 0
+somadifx = 0
+somadify = 0
+somadesvx =0
+somadesvy = 0
+k=1
+l=1
+
+do while (i<100)
+   i=i+1
+   if(i<=2) then
+      read(file_in,*)
+   else
+      read(file_in,*,iostat=error)var1,var2
+      read(file_in,*,iostat=error)var3,var4,var5,var6,var7,var8,var9,var10,var11,var12,var13
+      if(error==0) then
+         cont=cont+1
+         coordsx(cont)=var1
+		 coordsy(cont)=var2
+		 ceu(cont)=var6
+		 moffat(cont)=var12
+		 enclosed(cont)=var11
+		 direto(cont)=var13
+      end if
+   end if
+end do
+close(file_in)
+do j=1, cont
+	somaceu = somaceu+ceu(j)
+	somamoff = somamoff+moffat(j)
+	somaencl = somaencl+enclosed(j)
+	somadir = somadir+direto(j)
+end do
+do while (k<=cont/2)
+	difx(k)=coordsx(2*k)-coordsx(2*k-1)
+	dify(k)=coordsy(2*k)-coordsy(2*k-1)
+	somadifx = somadifx + difx(k)
+	somadify = somadify + dify(k)
+	k = k +1
+end do
+do while (l<=cont/2)
+	somadesvx = somadesvx + ((difx(l)-(2*somadifx/cont))**2)
+	somadesvy = somadesvy + ((dify(l)-(2*somadify/cont))**2)
+	l=l+1
+end do
+errox= sqrt((somadesvx)/(l-1))
+erroy= sqrt((somadesvy)/(l-1))
+write(*,*)"<Difference in X>	<Difference in Y> <Dispersion in X>  <Dispersion in Y>"
+write(*,*)2*somadifx/cont,2*somadify/cont,errox,erroy
+write(*,*)"<Sky average>   <PSF moffat>	<PSF enclosed>	<PSF direct>"
+write(*,*)somaceu/cont,somamoff/cont,somaencl/cont,somadir/cont
+
+open(unit=file_out,file="estat.log")
+write(file_out,*)"<Difference in X>	<Difference in Y> <Dispersion in X>  <Dispersion in Y>"
+write(file_out,*)2*somadifx/cont,2*somadify/cont,errox,erroy
+write(file_out,*)"<Sky average>   <PSF moffat>	<PSF enclosed>	<PSF direct>"
+write(file_out,*)somaceu/cont,somamoff/cont,somaencl/cont,somadir/cont
+close(file_out)
+
+end program estat_cl

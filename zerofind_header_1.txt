@@ -1,0 +1,11 @@
+V r
+SIGMAV 	r
+Q r
+U r
+SIGMA r
+P r
+THETA r
+SIGMAth r
+RMS r
+APERTURE r
+STAR r

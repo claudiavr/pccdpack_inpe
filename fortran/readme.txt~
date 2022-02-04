@@ -1,0 +1,15 @@
+Alguns codigos devem ser compilados no fortran do unix outros no fortran do IRAF.
+
+-- fc (fortran do IRAF)
+
+phot_pol_e.f
+
+-- gfortran ou equivalente (fortran do Unix)
+
+pccd4000*
+ordem_ie.f
+estat_cl.f90
+
+gfortran -ffixed-line-length-132 pccd4000*.f -e XXX.e
+
+
