@@ -51,7 +51,7 @@ begin
  int i = 1
  int j = 1
  int k = 0
- int compara, calc_num
+ int compara, calc_num, nrows
 
 ## VERIFICANDO SE ARQUIVO FILEEXE EXISTE - CVR
 ##
@@ -126,22 +126,27 @@ begin
  file_name = filename
 
  ## checagem de consistencia entre .dat e (nstars,nhw,calc)
-
+ # determinando numero de linhas do arquivo dat.*
  dum = mktemp("tmp$dum")
- unlearn tstat 
- tstat(file_name,3,> dum)
- ##print(tstat.nrows)
+ count(file_name,> dum)
+ # print (dum)
+ flist = dum
+ while (fscan(flist,line1) != EOF) {
+ aa = fscan(line1,nrows)
+ }
+ # print(nrows)
+ #
  if (calc == "c") calc_num = 2
  if (calc == "p") calc_num = 1
  compara = nstars*nhw*calc_num
- ##print(compara)
-
- if (compara != tstat.nrows) {
+ #print(compara)
+#
+ if (compara != nrows) {
      delete(dum,ver-)
      print("")
      print(" *** ERROR ****")
      print("The number of lines in the datfile is inconsistent with (nstars*nhw*calc)")
-     print("Number of lines in the datfile: ",tstat.nrows)
+     print("Number of lines in the datfile: ",nrows)
      print("(nstars*nhw*calc): ",compara)
      print("nstars  ",nstars)
      print("nhw  ",nhw)
@@ -153,9 +158,9 @@ begin
 #     scan (conti)
 #     if (conti == "n") print('oi')
      }
-
+#
  delete(dum,ver-)
-
+#
  #####
 
  copy(file_name,tmp,ver-)
@@ -163,8 +168,6 @@ begin
 
  temp0 = mktemp("pccdgen")
  flist = file_name
-
-
 
  for (i=1; i <= nhw; i += 1) {
       for (k=1; k <= nstars ; k += 1) {

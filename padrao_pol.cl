@@ -142,7 +142,6 @@ begin
 			if(i==3)linedata1 = fscan(line1,x2,y2,ceu2,sig2,fwhm2)
 			i=i+1
 		}
-
 		
 		fwhm=(fwhm1+fwhm2)/2
 	

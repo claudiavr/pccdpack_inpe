@@ -187,50 +187,45 @@ if ((nimage!=4) && (nimage!=8) && (nimage!=16)) {
 #lpar pccdpack_inpe.pospars_inpe
 #	
 #####
-#    print(" Estou pulando uma parte do código, pois não consigo compilar o estat_cl.f90.")
-#    estat_file=imagem//".estat"
-#    print(estat_file)
-#	if(passo<3){
-#    	print("")
-#    	print("=== Calculating some image statistics using the reference image. ===")	
-#    	print("=== You can pick up any stars... ===")	
-#    	print("")
-#    	print("Checking if CLESTAT already done. Looking for file: ",estat_file)
-#    	print("")
-#		if(access(estat_file)){
-#			print("CLESTAT already done. Redo? yes/no(default)")
-#			fazclest=no
-#			lixo2 = scan(fazclest)
-#		}
-#		if (fazclest){
-#			clestat(imagem,marca=no)
-#			rename("clestat.dao",estat_file)
-#			rename("estat.log",estat_file)
-#		}
-#	} ## fecha if (passo < 3) 
+    estat_file=imagem//".estat"
+	if(passo<3){
+    	print("")
+    	print("=== Calculating some image statistics using the reference image. ===")	
+    	print("=== You can pick up any stars... ===")	
+    	print("")
+    	print("Checking if CLESTAT already done. Looking for file: ",estat_file)
+    	print("")
+		if(access(estat_file)){
+			print("CLESTAT already done. Redo? yes/no(default)")
+			fazclest=no
+			lixo2 = scan(fazclest)
+		}
+		if (fazclest){
+			clestat(imagem,marca=no)
+			rename("estat.log",estat_file)
+		}
+	} ## fecha if (passo < 3) 
 #	
-#	flist1 = estat_file
-#	lixo = fscan(flist1)
-#	dados = fscan(flist1,shx,shy)
-#	lixo = fscan(flist1)
-#	dados = fscan(flist1,lixoreal,sigma,fwhm)
-#	
-#	if(shx > 0) lado="right"
-#	if(shx < 0) lado="left"
-#	shx=abs(shx)
-#	
-#	# print(lado)
+	flist1 = estat_file
+	lixo = fscan(flist1)
+	dados = fscan(flist1,shx,shy)
+	lixo = fscan(flist1)
+	dados = fscan(flist1,lixoreal,sigma,fwhm)
+	
+	if(shx > 0) lado="right"
+	if(shx < 0) lado="left"
+	shx=abs(shx)
+	
+	# print(lado)
 #
 ###############
 ## Configuring parameters according to image statistics
 ##
-	fwhm=6.0
-	sigma=45.0
 	daophot.datapars.fwhmpsf = fwhm
 	daophot.datapars.sigma = sigma
 	apphot.datapars.fwhmpsf = fwhm
 	apphot.datapars.sigma = sigma
-	print(" Sky_sigma=sqrt(sky)   &   FWHM")
+	print(" Sky  -  Sky_sigma=sqrt(sky)")
 	print(datapars.sigma,datapars.fwhmpsf)
 
 	ap=int(fwhm)
@@ -421,12 +416,9 @@ if ((nimage!=4) && (nimage!=8) && (nimage!=16)) {
 # 
 #### finding out the number of stars
 #
-		print ("oi 1")
-		# tstat("dat.001",2,outtabl="llixo")
-		print ("oi 2")
-		# nestrelas=tstat.nrows/(nimage*2)
-		nestrelas=3		
-		print(nestrelas)
+		tstat("dat.001",2,outtabl="llixo")
+		nestrelas=tstat.nrows/(nimage*2)
+#		print(nestrelas)
 		delete("llixo.tab",ver-)		
 		#
 #
@@ -533,9 +525,8 @@ if ((nimage!=4) && (nimage!=8) && (nimage!=16)) {
  		txdump(textfiles="*.mag.1",fields="image, msky, nsky, rapert, sum, area", \
  			expr="yes", > object//".pht")
 #
-#		tstat(object//".pht",2,outtabl="llixo")
-#		nestrelas=tstat.nrows/(nume_lam*2)
-		nestrelas=3
+		tstat(object//".pht",2,outtabl="llixo")
+		nestrelas=tstat.nrows/(nume_lam*2)
 #		print(nestrelas)
 		delete("llixo.tab",ver-)		
         unlearn phot_pol		

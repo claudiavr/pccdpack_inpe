@@ -17,7 +17,7 @@ string file_out          {prompt="output file (.out)"}
 string minimun="first"   {enum="first|full", prompt="minimum? (first,full)"}
 bool	erro = no		{prompt="Leave it no"}
   
-struct *flist,*flistvar
+struct *flist,*flistvar,*flist1
 
 begin
 
@@ -61,9 +61,9 @@ begin
      int  nfile, nlines
      
      string outfile, lix, cadena, filein_list, vtmpfile, namev, aarq
-     string waveplate, tmp, dum, dum2
+     string waveplate, tmp, dum, dum2, aa
      struct line, line10, line12, line14, line26, linedata, lineaper
-     struct line11, line13
+     struct line11, line13, line1
      
      sss = ssconst
      lineaper = "   0.       0.       0.       0.         0.     0.    "
@@ -91,25 +91,31 @@ begin
 
      # Fazendo o "do" nos arquivos da lista de entrada
      while (fscan(flistvar, namev) != EOF) {
-
-     nfile = nfile + 1
-
-     # Inicializa o puntero de lectura 'flist' ao archivo (.log)
-     flist = namev
-     print("File : ",namev)
-     nl = 0
-     nstar = 0
+       nfile = nfile + 1
+       # Inicializa o puntero de lectura 'flist' ao archivo (.log)
+       flist = namev
+       print("File : ",namev)
+       nl = 0
+       nstar = 0
 #
 # checking of the number of lines of the log file
 #   
-	dum = mktemp("tmp$dum")
-	dum2 = mktemp("tmp$dum")
- 	count(namev, > dum)
- 	tstat(dum,1, > dum2)
-    nlines=tstat.mean
-#    print(nlines)
+       dum = mktemp("tmp$dum")       
+       count(namev,> dum)
+       print (dum)
+       flist1 = dum
+       while (fscan(flist1,line1) != EOF) {
+       aa = fscan(line1,nlines)
+       print (aa)
+       }
+#	dum = mktemp("tmp$dum")
+#	dum2 = mktemp("tmp$dum")
+# 	count(namev, > dum)
+# 	tstat(dum,1, > dum2)
+#    nlines=tstat.mean
+    print(nlines)
     delete(dum,ver-)
-    delete(dum2,ver-)
+#    delete(dum2,ver-)
  	if (nlines < 32) {
      print("")
      print("*** ERROR in the MACROL_INPE task ****")

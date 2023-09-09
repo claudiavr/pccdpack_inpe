@@ -22,11 +22,6 @@
 ## the input ord file. And in the second the, coorde* files are created using this corrected
 ## input ord file.
 ##
-######################################################
-## September/2022 - CVR/IL
-## It was removed the parameters of the call of pccdgen_inpe routine related to the 
-## waveplate configuration: waveplate type, etc...
-######################################################
 procedure auto_pol
 
 string	object				{prompt="Root to output files"}
@@ -302,8 +297,7 @@ begin
 		tstat("dat.001",3)
 		nestrelas=tstat.nrows/(nume_lam*2)
 #		auto_pol.nestrelas=tstat.nrows/(nume_lam*2)
-#pccdgen_inpe(filename="dat.001",nstars=nestrelas,wavetyp="half",retar=180.,nhw=nume_lam,nap=nab,calc="c",readnoi=readnoise,ganho=gan,deltath=deltatheta, norm=norma, new_mod=nova, zero=0., fileout=object//".log")
-pccdgen_inpe(filename="dat.001",nstars=nestrelas,nhw=nume_lam,nap=nab,readnoi=readnoise,ganho=gan,deltath=deltatheta, norm=norma, new_mod=nova, fileout=object//".log")
+		pccdgen_inpe(filename="dat.001",nstars=nestrelas,wavetyp="half",retar=180.,nhw=nume_lam,nap=nab,calc="c",readnoi=readnoise,ganho=gan,deltath=deltatheta, norm=norma, new_mod=nova, zero=0., fileout=object//".log")
 		print("Checking the aperture having the smallest P error")
 		macrol_inpe(file_in=object//".log", file_out=object, minimun="full")
 		print("See results using select task")

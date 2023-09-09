@@ -15,4 +15,6 @@ Karleyne M. G. de Souza
 
 ## Versioning
 
+2023-09-09 - Correction of the position angle of the linear polarization. The solution of atan was not correctly considering the quadrants.
+
 2022-02-04 - First version in the github.

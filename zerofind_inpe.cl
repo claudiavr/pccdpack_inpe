@@ -25,7 +25,7 @@ int	plateend = 90		{prompt="Final zero (degrees)"}
 int	passo =1			{prompt="step for zero (degrees)"}
 
 begin
-	string arqin,arqout,outlog,arqmac
+	string arqin,arqout,outlog,arqmac,lixo
 	real plate,zero
 	int i
 	string file_zero
@@ -65,28 +65,35 @@ begin
 
 	delete(arqmac,ver-)
 	files(outlog//"*", >> arqmac)
+	print(arqmac)
+	
 	macrol_inpe(file_in="@"//arqmac,file_out=outmac,minimun=emin)
 	delete(arqmac,ver-)
 	delete(outlog//"*",ver-)
 
+    print('Pulando varias linhas, pois stsdas e tables não estão funcionando')
+    goto fim
+    
     file_full0      = mktemp("tmp$full0")
 	file_rms        = mktemp("tmp$rms")
-	file_final        = mktemp("tmp$final")
+	file_final      = mktemp("tmp$final")
+
+    lixo = scan(lixo)
 
 ######
 # criando tabela com resultados do macrol
 #
 	tab_macrol = mktemp("tmp$tab_macrol")
-	tcreate(tab_macrol,cdfile="pccdpack_inpe$zerofind_header_1.txt",datafile=outmac//".out",nskip=1)
+	nttools.tcreate(tab_macrol,cdfile="pccdpack_inpe$zerofind_header_1.txt",datafile=outmac//".out",nskip=1)
 #
 	tab_zero = mktemp("tmp$tab_zero")
-	tcreate(tab_zero,cdfile="pccdpack_inpe$zerofind_header_2.txt",datafile=file_zero,nskip=0)
+	nttools.tcreate(tab_zero,cdfile="pccdpack_inpe$zerofind_header_2.txt",datafile=file_zero,nskip=0)
 #
 # criando arquivo com RMS
 #
     stty ncols=200
- 	tdump(tab_macrol,cdfile="",pfile="",datafile=file_rms,columns="RMS")
- 	tdump(tab_macrol,cdfile="",pfile="",datafile=file_full0,columns="")
+ 	nttools.tdump(tab_macrol,cdfile="",pfile="",datafile=file_rms,columns="RMS")
+ 	nttools.tdump(tab_macrol,cdfile="",pfile="",datafile=file_full0,columns="")
 # 
 #    unlearn filecalc
 #        filecalc(outmac//".out","$1;$2;$3;$4;$5;$6;$7;$8;$9;$10;$11",lines="2-",
@@ -98,13 +105,13 @@ begin
 # Fazendo o grafico
 #
     unlearn tmerge
-	unlearn sgraph
-	unlearn axispar
-    axispar.xlabel = "zero"
-	axispar.ylabel = "rms"
-    sgraph(file_rms)
-    sgraph(file_rms)
-
+#	unlearn sgraph
+#	unlearn axispar
+#    axispar.xlabel = "zero"
+#	axispar.ylabel = "rms"
+#    sgraph(file_rms)
+#    sgraph(file_rms)
+#
 # Juntando tabela com valores da posicao da lamina e resultados da polarimetra
 #
     tmerge(file_zero//","//file_full0,file_full1,"merge")
@@ -127,7 +134,9 @@ begin
 	del(file_final,ver-)
 	del(file_zero,ver-)
 	stty ncols=80
-end
+fim:
+	print("     ")	
+	end
 
 
 
