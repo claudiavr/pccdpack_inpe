@@ -200,6 +200,8 @@ begin
                  theta_inst = 180 - t + deltatheta
                  q_inst = p*cos(2*theta_inst*pi/180)
                  u_inst = p*sin(2*theta_inst*pi/180)
+                 q_inst = q
+                 u_inst = u
                  print("")
                  if (waveplate == "quarter") {
 		   print("    Q_inst   U_inst   deltaTHETA  zerolam")
@@ -219,6 +221,8 @@ begin
                  theta_inst = 180 - t + deltatheta
                  q_inst = p*cos(2*theta_inst*pi/180)
                  u_inst = p*sin(2*theta_inst*pi/180)
+                 q_inst = q
+                 u_inst = u
                  print("")
                  print("    Q_inst   U_inst   deltaTHETA")
 		 printf("%10.5f %8.5f %8.1f",q_inst,u_inst,deltatheta)
