@@ -421,11 +421,11 @@ if ((nimage!=4) && (nimage!=8) && (nimage!=16)) {
 # 
 #### finding out the number of stars
 #
-		print ("oi 1")
-		# tstat("dat.001",2,outtabl="llixo")
-		print ("oi 2")
-		# nestrelas=tstat.nrows/(nimage*2)
-		nestrelas=3		
+#		print ("oi 1")
+		tstat("dat.001",2,outtabl="llixo")
+#		print ("oi 2")
+		nestrelas=tstat.nrows/(nimage*2)
+#		nestrelas=3		
 		print(nestrelas)
 		delete("llixo.tab",ver-)		
 		#
@@ -533,9 +533,9 @@ if ((nimage!=4) && (nimage!=8) && (nimage!=16)) {
  		txdump(textfiles="*.mag.1",fields="image, msky, nsky, rapert, sum, area", \
  			expr="yes", > object//".pht")
 #
-#		tstat(object//".pht",2,outtabl="llixo")
-#		nestrelas=tstat.nrows/(nume_lam*2)
-		nestrelas=3
+		tstat(object//".pht",2,outtabl="llixo")
+		nestrelas=tstat.nrows/(nume_lam*2)
+#		nestrelas=3
 #		print(nestrelas)
 		delete("llixo.tab",ver-)		
         unlearn phot_pol		

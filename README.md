@@ -15,6 +15,8 @@ Karleyne M. G. de Souza
 
 ## Versioning
 
+2023-11-02 - Bug correction.
+
 2023-10-11 - graf_inpe.cl was modified in order to be consistent with previous modification.
 _
 2023-09-09 - Correction of the position angle of the linear polarization. The solution of atan was not correctly considering the quadrants. The fortran code pccd4000gen23.f should be compiled in used as the exe in the pccdgen_inpe IRAF task.
