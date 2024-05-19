@@ -25,8 +25,8 @@ string	lista="@list_obj"	{prompt="Input image list"}
 string	imagem				{prompt="Reference image to registering procedure"}
 pset    pospars_inpe		{prompt="Number of retarder positions (=# of iamges) :e"}
 int     nume_lam=16			{prompt="Number of retarder position in the datafile (max. 16)"}
-real	readnoise			{prompt="Readout noise - ADU"}
-real	gan					{prompt="Gain - e-/ADU"}
+real	readnoise=1			{prompt="Readout noise - ADU"}
+real	gan=1				{prompt="Gain - e-/ADU"}
 real	anel=60				{prompt="Internal radius of sky ring"}
 real	danel=10			{prompt="Width of the sky ring"}
 bool	autoabe=yes			{prompt="Are apertures automatically defined?"}
@@ -36,8 +36,8 @@ int		deltab=-2			{prompt="First aperture displacement relative to FWHM"}
 string	aberturas			{prompt="Aperture list - max = 20"}
 string  desloca='xregister'	{enum="no|xregister|acha_shift", prompt="Method to calculate images shifts"}
 #bool	registro=no			{prompt="Usa o Xregister para calcular o deslocamento entre as imagens?"}
-string	regiao				{prompt="Region to crosscorrelate the images (if desloca=xregister)"}
-int		janela				{prompt="Size of the correlation window (if desloca=xregister)"}
+string	regiao='[200:300,200:300]'			{prompt="Region to crosscorrelate the images (if desloca=xregister)"}
+int		janela=20			{prompt="Size of the correlation window (if desloca=xregister)"}
 #bool	acha=no				{prompt="Use acha_shift to find register images?"}
 #bool	confirma=no			{prompt="Check each image using TVMARK when using acha_shift?(if desloca = acha_shift)"}
 bool	confirma=no			{prompt="Show TVMARK of each file."}
@@ -120,10 +120,10 @@ begin
 #		print("Primeiro o objeto inferior e depois o superior")
 #		print("Use a letra A para marcar")
 #		print("Use a letra Q para sair")
-		print("Find the standard star two images.")
-		print("With the mouse over the bottom image, type A.")
-		print("With the mouse over the top image, type A.")
-		print("Type Q if you are ready.")
+		print("Find the two images of the object.")
+		print("With the mouse over the bottom image, type a.")
+		print("With the mouse over the top image, type a.")
+		print("Type q if you are ready.")
 #	
 		if(access("padrao.coo")) delete("padrao.coo",ver-)
 		temp3 = mktemp("tmp$padrao")

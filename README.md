@@ -13,7 +13,21 @@ Claudia Vilega Rodrigues
 Victor de Souza Magalhães
 Karleyne M. G. de Souza
 
+## Installation
+
+No IRAF V2.18, MacOS, os pacotes externos (e portanto o diretório do pccdpack) devem ser colocados no diretório:
+
+/Applications/IRAF.app/Contents/iraf-v218/extern .
+
+No arquivo pccdpack_inpe.cl, modifique a linha abaixo para ficar de acordo com a localizacao do pccdpack_inpe:
+
+	set      pccdpack_inpe          = "/Applications/IRAF.app/Contents/iraf-v218/extern/pccdpack_inpe/"
+
+Toda a secao de "rotinas fortran" precisa ter o caminho alterado.
+
 ## Versioning
+
+2024-05-19 - Modified to work in IRAF V2.18
 
 2023-11-02 - Bug correction.
 
