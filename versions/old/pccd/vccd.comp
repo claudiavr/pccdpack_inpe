@@ -1,0 +1,1 @@
+f77 -s -O3 -o vccd.exe vccd.f

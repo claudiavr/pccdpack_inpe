@@ -31,8 +31,8 @@
 	apphot
 	print ('apphot')
 #		
-	set     pccdpack_inpe          = "/Applications/IRAF.app/Contents/iraf-v218/extern/pccdpack_inpe/"
-	set		inpe_fortran		   = "pccdpack_inpe$fortran/"
+	set     pccdpack_inpe          = "/Users/claudiarodrigues/pccdpack_inpe/"
+#	set		inpe_fortran		   = "pccdpack_inpe$fortran/"
 #
 	package pccdpack_inpe
 #
@@ -73,15 +73,15 @@
 	
 ### Rotinas em fortran ###
 	
-	task	$coords_padrao	= "$/Applications/IRAF.app/Contents/iraf-v218/extern/pccdpack_inpe/fortran/coords_padrao.e $(*)"
-	task	$estat_cl		= "$/Applications/IRAF.app/Contents/iraf-v218/extern/pccdpack_inpe/fortran/estat_cl.e $(*)"
-	task	$ordem_ie		= "$/Applications/IRAF.app/Contents/iraf-v218/extern/pccdpack_inpe/fortran/ordem_ie.e $(*)"
-	task    $combina_pol	= "$/Applications/IRAF.app/Contents/iraf-v218/extern/pccdpack_inpe/fortran/combina_pol.e $(*)"
-	task	$polmed			= "$/Applications/IRAF.app/Contents/iraf-v218/extern/pccdpack_inpe/fortran/polmed.e $(*)"
-	task    $phot_pol_e     = "$/Applications/IRAF.app/Contents/iraf-v218/extern/pccdpack_inpe/fortran/phot_pol_e.e $(*)"
-	task	$limpa_mapa		= "$/Applications/IRAF.app/Contents/iraf-v218/extern/pccdpack_inpe/fortran/limpa_mapa.e $(*)"
+	task	$coords_padrao	= "$/Users/claudiarodrigues/pccdpack_inpe/fortran/coords_padrao.e $(*)"
+	task	$estat_cl		= "$/Users/claudiarodrigues/pccdpack_inpe/fortran/estat_cl.e $(*)"
+	task	$ordem_ie		= "$/Users/claudiarodrigues/pccdpack_inpe/fortran/ordem_ie.e $(*)"
+	task    $combina_pol	= "$/Users/claudiarodrigues/pccdpack_inpe/fortran/combina_pol.e $(*)"
+	task	$polmed			= "$/Users/claudiarodrigues/pccdpack_inpe/fortran/polmed.e $(*)"
+	task    $phot_pol_e     = "$/Users/claudiarodrigues/pccdpack_inpe/fortran/phot_pol_e.e $(*)"
+	task	$limpa_mapa		= "$/Users/claudiarodrigues/pccdpack_inpe/fortran/limpa_mapa.e $(*)"
 	
-	pccdgen_inpe.fileexe = "/Applications/IRAF.app/Contents/iraf-v218/extern/pccdpack_inpe/fortran/pccd4000gen15_inpe.e"
+	pccdgen_inpe.fileexe = "/Users/claudiarodrigues/pccdpack_inpe/fortran/pccd4000gen24.e"
 
 	clbye()
 end

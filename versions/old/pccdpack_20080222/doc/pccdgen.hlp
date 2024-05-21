@@ -1,0 +1,63 @@
+.help pccdgen Nov02 pccdpack
+.ih
+NAME
+pccdgen -- Calculate polarimetric parameters from a file (.dat).
+.ih
+USAGE
+pccdgen filename
+.ih
+PARAMETERS
+.ls filename
+Input file (.dat).
+.le
+.ls nstars
+Number of stars (maximum 2000).
+.le
+.ls wavetype
+Define which type of waveplate was used (half or quarter).
+.le
+.ls nhw
+Number of posicoes of wave-plate (maximum 16).
+.le
+.ls pospars
+Parameter set to activate the selected sequence of positions of the waveplate to
+calculate the Stokes parameters. To edit type e:
+.le
+.ls nap
+Number of apertures used (maximum 10).
+.le
+.ls calc
+Select the analyser: calcite (c) | Polaroid (p) .
+.le
+.ls readnoise
+CCD readout noise (in ADUs).
+.le
+.ls ganho
+CCD Gain (in electrons/ADU).
+.le
+.ls deltatheta
+Correction in polarization angle (in degrees).
+.le
+.ls zero
+Anglel between the waveplate and analyser (in degrees).
+.le
+.ls fileout
+Output file (.log)
+.le
+.ls fileexe
+Execute file (.exe) of pccdgen FORTRAN routine. Put the complete path (as example:
+ /iraf/extern/pccdapck/pccd/pccd2000gen.exe).
+.le
+.ih
+DESCRIPTION
+The task executes the pccd FORTRAN routine to calculate the polarimetry data.
+.ih
+EXAMPLES
+pccdgen hd62542_8.dat
+.ih
+TIME REQUIREMENTS
+.ih
+BUGS
+.ih
+SEE ALSO
+.endhelp

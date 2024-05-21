@@ -81,6 +81,7 @@ begin
      # Define nome do archivo de saida (.out), no diretorio tmp$
      tmp = envget("tmp")
      outfile = tmp // file_out // ".out"
+     # print(outfile)
      if (access(outfile)) delete(outfile, ver-)
  
      # Imprime cabecario no archivo de saida 
@@ -102,7 +103,7 @@ begin
 #   
        dum = mktemp("tmp$dum")       
        count(namev,> dum)
-       print (dum)
+#       print (dum)
        flist1 = dum
        while (fscan(flist1,line1) != EOF) {
        aa = fscan(line1,nlines)
@@ -113,7 +114,7 @@ begin
 # 	count(namev, > dum)
 # 	tstat(dum,1, > dum2)
 #    nlines=tstat.mean
-    print(nlines)
+#    print(nlines)
     delete(dum,ver-)
 #    delete(dum2,ver-)
  	if (nlines < 32) {
@@ -137,11 +138,11 @@ begin
      
          # Conta o numero de linha
          nl = nl + 1 
-         
+         # print("nl ", nl)
          # Pega os dados da linha nl
          if ((waveplate == "quarter") || (waveplate == "other") || (waveplate == "v0other"))
              linedata = fscan (line, vv, svv, qq, uu, ss, pp, tt, st, sfull)
-	 else
+	     else
              linedata = fscan (line, qq, uu, ss, pp, tt, st)
 
          # Elimina do calculo as linhas con dados espureos
@@ -153,11 +154,11 @@ begin
 
          
          # lee o numero de estrelas do arquivo de entrada (.log)
-         if (nl == 10)
-	     line10 = fscan (line, lix, lix, lix, lix, stars)
-
+         if (nl == 10) 
+	       line10 = fscan (line, lix, lix, lix, lix, stars)
+        
          #lee o tipo de lamina retardadora usada
-	 if (nl == 11)
+	     if (nl == 11)
 	     line11 = fscan(line,lix,lix,lix,waveplate)
 
 
@@ -179,9 +180,10 @@ begin
              line14 = fscan (line, lix, lix, lix, lix, apertures)
              
          # lee tamanho da apertura
-         if (substr(line,1,9) == " APERTURE")
+         if (substr(line,1,9) == " APERTURE") {
              line26 = fscan (line, lix, lix, aperval)
-	 
+             # print(aperval)
+	 	 }
              
          if (substr(line,1,5) == " STAR")  
              primin = no
@@ -202,9 +204,7 @@ begin
            
              
              # Verfica letura ate o numero massimo de aperturas
-             if (apertures > naper) { 
-             
-                
+             if (apertures > naper) {              
   
                  # Verifica sim o numero de linha contem os dados Q, U, ,,,
                  # e evalua cada apertura para a estrela nstar
@@ -215,9 +215,9 @@ begin
                      print ("Evaluating...star ", nnstar, " of ", stars, ", aperture ", naper, " of ", apertures)  
                     
                      if (minimun == "first") {
-		         if (ss > sss)
+		                     if (ss > sss)
                              primin = yes
-	             }
+	                 }
                        
                      # Verifica se o SIGMA e' minimo 
                      if (ss < sss && primin == no) {

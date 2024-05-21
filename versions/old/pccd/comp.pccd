@@ -1,0 +1,2 @@
+f77 -s -O3 -o pccd.exe pccd.f
+

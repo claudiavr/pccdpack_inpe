@@ -1,0 +1,348 @@
+Updates: pccdpack
+
+mm/dd/yy task        comments
+
+
+03/14/06 magnit      changed msky=2*msky 
+
+
+12/01/05 quickpol    include new internal option to reimag='yes' ("Select
+                     bright stars interactively? (yes|no)?")
+
+11/30/05 selstat     temporary files created in tmp$ directory to
+                     properly work in VMware shared directories.
+
+11/30/05 checkcen    option cont='no' corrected.
+
+11/03/05 prepiv      new task to prepare infrared images added
+                     (included in pccdpack.cl).
+
+11/01/05 align       new task to align set of images added
+                     (included in pccdpack.cl).
+
+10/27/05 peaks       new task to plot peak values of star profiles
+                     in a set of images (included in pccdpack.cl).
+
+10/18/05 vecplot     new parameter 'longescala' added to choose the
+                     scale size (in %).
+
+08/26/05 grafep      temporary file 'fileigi' is now created in tmp$
+                     diretory to properly work in VMware shared directories.
+
+07/01/05 select      new parameter 'ivdata' added to understand 'file_out'
+                     file from infrared data.
+
+04/05/05 extfib      new task to extract fibers from IFU data (included
+                     in pccdpack.cl).
+
+03/02/05 fintab      variable file_out assigned properly for option mapa=yes
+                     (to use in vWWare shared directories).
+         pccdgen     include new option waveplate='v0other' (new executable
+                     pccd2000gen05.exe)
+         macrol      works with waveplate='v0other'
+	 graf        works with waveplate='v0other'
+
+
+08/30/04 taufind     new task added (included in pccdpack.cl).
+         zerofind    new task added (included in pccdpack.cl).
+
+08/26/04 correfer    definition of task corrected in pccdpack.cl file.
+         fintab      temporary files (filestxt,txtmapa) created in
+	             tmp$ diretory for files (file_txt,txt_mapa) properly
+		     work in WMWare shared directories.
+
+08/25/04 refer       temporary 'filetxt' file created in tmp$ directory
+                     for 'file_txt' file properly works in VMware shared
+		     directories.
+
+08/18/04 correfer    new task added (to pccdpack.cl).
+
+06/28/04 magnit      temporary (igi and fileout) files now are created in
+                     tmp$ directory.
+
+06/25/04 quickpol    new temporary file (temp20) is created in tmp$ directory
+                     for temp2 file properly works in VMware shared directories.
+
+06/14/04 quickpol    unlearn 'rename' added (after first 'filecalc' call)
+
+05/31/04 checkcen    new display with zoom of 100x100 centered in objects.
+
+07/29/03 ordem       output temporary file (file0) is created in tmp$
+                     directory. Then, 'file0' file is copied to the output
+		     file (file_out).
+
+07/21/03 macrol      new parameter 'minimum' added. It permits to control if
+                     the first ('first') or the lowest ('full') minimum for
+		     SIGMA will be used to select the best aperture.
+
+06/26/03 quickpol    new task. It permits run in sequence daofind, ordem,
+                     imalign, coorshift, phot, pccd, macrol and select
+		     tasks. 
+
+06/25/03 pccd        temporary files (file1,file2:entrada,roda) are now
+                     created in tmp$ directory.
+         pccdgen     temporary files (file1,file2:entrada,roda) are now 
+                     created in tmp$ directory.
+         macrol      'outfile' file is now temporary created in $tmp 
+                     directory and then moved to work directory.
+         select      'file_sel' file (and eps file, when is generated)
+                     is(are) now temporary created in $tmp directory and
+                     then moved to work directory.  
+         graf        temporary files (file1,file2,file3) are now cretaed in
+                     tmp$ directory.
+
+06/02/03 pccd        readme.compile: updated
+         pccdgen     pccd2000gen.f: correction to avoid recursive
+                     increment in 'zerolam' parameter for apertures
+		     higher than first.
+         macrol      corrected to run properly for case waveplate=
+	             'quarter' (SIGMA is used as filter)
+
+05/30/03 graf        corrected to run properly for case waveplate=
+	             'quarter' (v, sigmav and zerolam parameters were
+		     included in text and graphics output).
+
+05/30/03 pccdgen     pccd2000gen.f: correction in algorithm for case
+                     waveplate='quarter'. The parameter 'zerolam' is now
+		     properly used.
+		     pccd2000gen.f: a correction in output text
+		     (+V --> -V) in modulation formula was done.
+		     pccd2000gen.f: change order in contruction of z(i)
+		     to be consistent with case waveplate='half' (now,
+		     z(i)= (ane1(i) - ano1(i))/(ane1(i) + ano1(i)) ).
+		     pccd2000gen.readme: update to include the correction
+		     in algorithm for case waveplate='quarter'.
+		     pccd2000gen.readme: update to include modification
+		     in z(i) for case waveplate='quarter'.
+
+02/21/03 refer       corrected confirmation of internal txdump task.
+                     corrected confirmation to delete 'file_txt' file.
+
+02/19/03 vecplot     added 'deligi' parameter as an option to delete igi
+                     file.
+
+02/06/03 graf        corrected to run properly when aperture is maximum
+                     (in case, max_aperture != 12 and nstar > 1). 
+
+02/05/03 graf        temporary files (file1,file2,file3) deleted with
+                     option 'ver-'.
+
+02/05/03 pccd        temporary files (file1,file2:entrada,roda) deleted
+                     with option 'ver-'.
+
+02/05/03 pccdgen     temporary files (file1,file2:entrada,roda) deleted
+                     with option 'ver-'.
+
+02/05/03 pccdgen     corrected to run properly with 16 positions ('pu'
+                     array is now properly defined by 'pt' array; and,
+		     sequence of selected positions are properly readed).
+
+12/17/02 refer       new parameter 'cbox' added for best control of
+                     'recen'=yes option.
+
+12/16/02 pccdgen     corrected to run properly with 'nstars' > 1.
+
+12/13/02 graf        run properly with pccdgen output file (.log)
+         macrol      'file_in' parameter accepts list file (@*).
+
+12/12/02 macrol      run properly with pccdgen output file (.log) when
+                     'nhw_used' < 'nhw'.
+         pccdgen     updated pccd2000gen.readme file: Section 1 ('Half-waveplate
+                     + Calcite') added; Section 2 updated .
+         pccdgen     pccd2000gen.f: change in output header of log file.
+                     ('Waveplate pos. sequence used :' --> 'Waveplate pos. :')
+		     It permits than macrol could run on log file when
+		     pccd2000gen.f is compiled on UNIX/SUN systems.
+         pccdgen     use of normalization is an option for half-calcite mode.
+	             New parameter 'norm' added (pccd2000gen.f changed to
+		     included this option).
+         pccdpack    correction added to INSTALL.README file (steps 6 and 10).
+	 pccdpack    updated pccdpack$pccd/readme.compile file.
+
+11/12/02 pccdgen     correction to extract the proper waveplate position
+                     data added.
+
+12/04/02 graf        order altered in output parameters in graphic output.
+                     ('deltatheta' follows to 'theta' parameter). 
+
+12/03/02 graf        correction applied in fitting algorithm to include
+                     modification in 'pccd' task of 09/12/02. Now, the
+		     fitting algorithm uses the Q and U instrumental Stokes
+		     parameters to be consistent with data points. It
+		     corrects the shift between the fitting and data points.
+		     The Q and U instrumental parameters and deltatheta
+		     angle are showed in text and graphics output.
+	 graf        correction in filter for objects with no data included.
+	 graf        english translate for warnings messages and plot axis.
+
+11/29/02 pccdpack    correction in welcome message added (IAG name).
+                     compile information (step 10) added to INSTALL.README
+		     file.
+
+11/22/02 ordem       ID number appears properly in output file and text
+                     (before it appeared as "0" for all the objects).
+
+11/08/02 pccdpack    Version November'02 released.
+         pccdpack    menu file updated.
+         graf        help updated
+         graf        struct parameter (flist) is blanked after a run.
+         macrol      help updated.
+         macrol      struct parameter (flist) is blanked after a run.
+         pccdgen     help updated.
+	 
+11/07/02 vecplot     now, output postscript file is adequately created
+                     (file_ps//".eps).
+         vecplot     temporary files (igi,temp1) are now  created in tmp$
+	             directory with aleatory names.
+         select      help updated.
+	 vecplot     help added.
+	 ordem       help updated.
+	 ordem       struct parameter (flist1) is blanked after run.
+	 ordem       maximum number of objects permitted in .coo file
+	             is now 5000.
+         ordem       english translate for output text.
+         ordem       spell correction in parameter set.
+	 ordem       set default values for (deltax,deltay,deltamag)
+	             parameters.
+         pccd        help updated.
+
+11/06/02 vecplot     english translate for parameters info and output text.
+         vecplot     struct parameters (flist0, flist1, line) are blanked
+	             after a run.
+11/04/02 fintab      help added.
+         fintab      'file_img' and 'imgmapa' parameters info updated:
+                     "...(.img,.fits)".
+         fintab      english translate in text output.
+
+11/01/02 refer       transformation algorithm: ('norte'=top,'leste'=right)
+	             simplified; rotation included.
+	 refer	     spell correction in parameter set.
+	 refer       help added.
+
+10/31/02 refer       'imgrefer' parameter info updated: "...(.imh,.fits)".
+         refer       struct parameters (flist, flist1, line) are blanked
+	             after a run.
+         refer       transformation algorithm: ('norte'=right,'leste'=top)
+	             simplified; rotation not included yet.
+         refer       transformation algorithm: ('norte'=right,'leste'=bottom)
+	             checked; rotation not included yet.
+         refer       transformation algorithm: ('norte'=left,'leste'=top)
+	             simplified; rotation not included yet.
+         refer       transformation algorithm: ('norte'=left,'leste'=bottom)
+	             simplified and corrected; rotation not included yet.
+         refer       transformation algorithm: ('norte'=top,'leste'=left)
+	             checked; rotation not included yet.
+         refer       transformation algorithm: ('norte'=bottom,'leste'=right)
+	             simplified; rotation not included yet.
+         refer       transformation algorithm: ('norte'=bottom,'leste'=left)
+	             simplified and corrected; rotation not included yet.
+
+
+10/30/02 select      help updated.
+         magnit      help added.
+         magnit      struct parameters (flist, line) are blanked after a
+	             run.
+
+10/29/02 coorshift   help added
+         coorshift   spell correction in parameter set and text output.
+         graf        error in graphic title corrected. Now, the  (.log)
+	             file name appears in the title.
+         graf        English translation for text output.
+
+10/28/02 select      help added.
+
+10/23/02 select      Ranges added to 'thetamin' (min=-90:max=0) and
+                     'thetamax' (min=90:max=180) parameters.
+
+10/22/02 select      (file_out) and (file_ord) parameters are now
+                     confirmed when 'select' is invoked.
+         select      english translate for output text.
+	 select      eliminated internal parameters 'flist3' and 'line3'.
+	             They are substituted by the already existent
+		     parameters: 'flist' and 'line'
+
+10/21/02 select      temporary files  (campo,histopol,histopol.his,theta,
+                     theta.his,qu,igi,as,tab,gausstheta) are now  created
+		     in tmp$ directory with aleatory names.
+         select      accept new format of output table and new  reading
+	             parameters from 'ngaussfit' (stsdas.analysis.fitting,
+		     Sep97) to calculate the fit parameter for theta
+		     histogram. Previous versions of 'ngaussfit' will not
+		     work with 'select'.
+         coorshift   accept new format of the imalign output file.  Shift
+                     section are recognized when begun with "#!" (old
+		     format) or "#S" (new format) strings.
+	 coorshift   temporary file (temp1) is now created in tmp$
+	             directory with aleatory name.
+         coorshift   struct parameter (flist) is blanked after a run.
+	 coorshift   english translate for output text.
+
+10/17/02 select      duplicated confirmation of 'file_out' parameter
+                     corrected.
+	 select      struct parameters (flist,..) are blanked after a run.
+         macrol      delete 'file_out' if exists before of a run to
+	             avoid concatenation when this file is already
+		     present.
+	 macrol	     help updated.
+	 macrol      correction to include the proper exclusion of
+	             lines with bad data for any system where the routine
+		     was run (these lines have "Nan" or "nan" strings).
+		     These lines are replaced by a line with "0"s.
+
+10/07/02 fintab      filter condition eliminated by redundancy because
+                     this condition already is considered in 'refer'  and
+		     'magnit' routines.
+
+10/07/02 refer       filter condition altered to include exclusion of
+                     objects with sigma=0.
+
+10/07/02 magnit      filter condition altered to include exclusion of
+                     objects with (theta=deltatheta, q=cq, u=cu, and
+		     sigma=0) to be coherent to 'refer' routine.
+
+10/04/02 fintab      correction in concatenation of .mag and .txt files to
+                     avoid inconsistency with the equatorial coordinates
+		     assigned when objects with sigma=0 were being included
+		     in the process.
+	 fintab	     internal parameters call updated for new version
+		     of 'eqxy' task (gasp).
+
+10/02/02 pccdgen     new task. Resolves the Stokes parameters for any
+	             combination of waveplate (half or quarter) and analyzer
+		     (calcite -tested- or polaroid -not tested-) and for any
+		     sequence of the waveplate positions. It works with
+		     the executable pccd2000gen.exe. See help page and
+		     (pccdpack$pccd/pccd2000gen.readme) for details.
+
+09/25/02 pccdpack    install procedures added (see pccdpack$INSTALL.README).
+
+09/24/02 pccd        help updated.
+         graf        help added.
+	 checkcen    help added.
+	 specp       Spectropolarimetry packcage added (contact: Alex
+	             Carciofi, acarcio@physics.utoledo.edu).
+
+09/12/02 pccd        pccd2000.exe: Q and U recalculated to be coherent with
+                     final theta. It corrected the changed sign in U
+		     parameter and also set the correct Q and U when a
+		     deltatheta is included.
+
+08/22/02 pccdpack    Version August'02 released.
+
+08/19/02 pccd        pccd2000.exe: introduced (r2t = r2t*ganho) to correct
+                     discrepancy in sigma theoret.
+         pccd        pccd2000.exe: added digit to the value of the
+	             theoretical polarization error output.
+         pccdpack    new parameter files with English description.
+	 macrol      English translation for help.
+	 ordem       English translation for help.
+	 pccd        English translation for help.
+
+
+Antonio Pereyra
+antonio@astro.iag.usp.br
+
+
+
+
+

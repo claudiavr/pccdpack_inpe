@@ -109,14 +109,13 @@ c	  print*, norm
 
 
 	  print*, '$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$'
-	  print*, '$$$$$$$$$$$$$$ pccd4000gen22.f VERSION Oct/2015 $$$$$$$$$$$$$$'
+	  print*, '$$$$$$$$$$$$$$ pccd4000gen24.f VERSION May/2024 $$$$$$$$$$$$$$'
 	  print*, '$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$'
 c
 	  print*, '*.dat file to reduce: '
 	  print *
 	  print*, '***** FILENAME = '
 	  print*, filename
-	  print *
 	  print *
 	  print*, 'No. of stars : ', nstars
 	  if (wavetype.eq.'half') then

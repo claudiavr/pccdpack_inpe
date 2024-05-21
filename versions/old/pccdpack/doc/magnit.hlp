@@ -1,0 +1,140 @@
+.help magnit Oct02 pccdpack
+.ih
+NAME
+magnit -- calculate magnitudes using 'phot' and 'select' output
+files.
+.ih
+USAGE
+magnit file_mag file_sel
+.ih
+PARAMETERS
+.ls file_mag [string]
+Input file of with magnitude information. This file is the output
+file of 'phot' task. Generally, this file has a ".mag.?" extension
+where"?" is 1, 2, etc.
+.le
+.ls file_sel [string]
+Input file (.sel) with filtered polarimetric data. This file is
+the output file of 'select' task.
+.le
+.ls (file_out) [string]
+Output file name. A ".mgn" extension will be added to this name.
+If this file already exists, it will be overwritten.
+.le
+.ls (ganho = "epadu") [string]
+What is the header keyword for gain in 'file_mag'? It is necessary to
+obtain the same gain value used in 'file_mag'.
+.le
+.ls (correc = 0) [real]
+Additive correction for instrumental magnitude.
+.le
+.ls (erro_correc = 0) [real]
+Associated error for 'correc'.
+.le
+.ls (outgraph = yes) [boolean]
+If 'outgraph' = yes, a postscript file will be created with the
+graphic output. The file name will be 'file_out' added ".eps"
+extension. If this file already exists, it will be overwritten.
+.le
+.ih
+DESCRIPTION
+This task permits to calculate magnitudes using the same CCD images
+used to obtain the polarimetry measurements. The magnitudes are
+calculated using one of the waveplate position images for a given
+field. In this case, the counts of ordinary and extraordinary
+beams for each object are summed in the same aperture used to the
+polarization calculation.
+
+The task used the 'select' output file (file_sel) where are looking
+for the pixel positions for the objects in a given field. The
+'phot' output file (file_mag) for one of the waveplate positions
+images is also used (usually is selected the first position). From
+'file_mag' file are extracted, for any object in the field, the
+followings parameters (the subindex 'o' indicates the ordinary beam
+and 'e' the extraordinary beam):
+
+.nf
+zmag:               zero point of scale magnitude
+itime:              integration time
+msky_o, msky_e:     sky magnitude (adu/pixel)
+stdev_o, stedv_e    sky magnitude error (adu/pixel)
+nsky_o, nsky_e:     number of pixels used in sky calculation (pixel)
+area_o (= area_e):  aperture area used (pixel)
+sum_o, sum_e:       count inside the aperture (adu)
+gain:               gain (e-/adu)
+.fi
+
+and, then the parameters are recalculated following:
+
+.nf
+sum   = sum_o + sum_e
+msky  = (msky_o + msky_e)/2
+area  = area_o
+stdev = sqrt(stdev_o^2 + stdev_e^2)/2
+nsky  = (nsky_o + nsky_e)/2
+.fi
+
+The instrumental magnitude and its error are obtained using
+the following expressions:
+
+.nf
+mag       = zmag - 2.5*log10(sum - area*msky) + 2.5*log10(itime)
+
+mag_error = 1.0857*sqrt((sum - area*msky)/gain +
+                         area*stdev^2 +
+			 area^2*stdev^2/nsky)/(sum - area*msky)
+.fi
+
+If any additive correction for the instrumental magnitudes is
+going to be considered (for example, to transform to the
+standard system), this correction and its error are included in
+'correcao' and 'erro_correc' parameters. In this case, the resultant
+magnitudes and its error will be:
+
+.nf
+mag(new)       = mag(old) + 'correcao'
+
+mag_error(new) = sqrt(mag_error^2(old) + 'erro_correc'^2)
+.fi
+
+The output file (file_out) consists in six columns: the
+magnitude, the magnitude error, the polarization, the polarization
+error, the polarization angle and the identification star number.
+
+Graphic Output
+.ls
+The graphic output consists of two plots. The first one (left) is a
+magnitude histogram for the sample and the second one (right) is a
+polarization vs magnitude diagram that is useful to detect any
+possible correlation. If 'outgraph' = yes, a postscript file will be
+created with the graphic output.
+.le
+.ih
+EXAMPLES
+
+1. Run magnit. A typical parameter set is showed.
+
+.nf
+pc> lpar magnit
+     file_mag = "fits0139.imh.mag.1" input magnitude file from phot (.mag.?)
+     file_sel = "15_10s.sel"    input select file (.sel)
+    (file_out = "teste")        output file (.mgn)
+       (ganho = "epadu")        keyword for gain in magnitude file?
+      (correc = -3.0638)        magnitude correction?
+ (erro_correc = 0.51)           error in magnitude correction?
+    (outgraph = yes)            create eps (.eps)?
+       (flist = "")
+        (line = "")
+        (mode = "ql")
+
+pc> magnit fits0139.imh.mag.1 15_10s.sel
+Warning: Attempt to delete a nonexistent file (teste.mgn)
+Warning: Attempt to delete a nonexistent file (teste.mgn.eps)
+.fi
+.ih
+TIME REQUIREMENTS
+.ih
+BUGS
+.ih
+SEE ALSO
+.endhelp

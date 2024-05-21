@@ -25,6 +25,10 @@ No arquivo pccdpack_inpe.cl, modifique a linha abaixo para ficar de acordo com a
 
 Toda a secao de "rotinas fortran" precisa ter o caminho alterado.
 
+Nova versao do IRAF: https://iraf.noirlab.edu/
+https://arxiv.org/abs/2401.01982
+
+
 ## Versioning
 
 2024-05-19 - Modified to work in IRAF V2.18

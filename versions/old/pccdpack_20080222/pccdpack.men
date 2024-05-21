@@ -1,0 +1,17 @@
+
+# Menu file for PCCDPACK package
+
+   conta     - Count stars in a cell of one image.
+   coorshift - Construct coordinates files for each position wave-plate image.
+   extpol    - Plot extinction vs. polarization.
+   fintab    - Create a polarization catalog.
+   graf      - Plot and fit Z x theta for a given aperture.
+   macrol    - Extract the aperture with the lower error from .log file of pccd.
+   magnit    - Calculate magnitudes using *.mag and .sel files.
+   ordem     - Select and put in order coordinate files from daofind.
+   pccd      - Calculate polarimetry data from a .dat file.
+   refer     - Convert CCD coordinates to image reference coordinates.
+   select    - Select stars in a given range of polarization.
+   specp     - Spectropolarimetry package.
+   vecplot   - Plot polarization vectors.
+

@@ -1,0 +1,52 @@
+.help select Aug02 pccdpack
+.ih
+NAME
+select -- select stars using several conditions.
+.ih
+USAGE
+select  
+.ih
+PARAMETERS
+.ls 
+
+.le
+.ls 
+
+.le
+.ls 
+
+.le
+.ls 
+
+.le
+.ls 
+
+.le
+.ls 
+
+.le
+.ls 
+ 
+.le
+.ls 
+
+.le
+.ls 
+
+.le
+.ls 
+
+.le
+.ih
+DESCRIPTION
+
+.ih
+EXAMPLES
+
+.ih
+TIME REQUIREMENTS
+.ih
+BUGS
+.ih
+SEE ALSO
+.endhelp

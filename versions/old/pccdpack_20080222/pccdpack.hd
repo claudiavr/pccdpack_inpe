@@ -1,0 +1,19 @@
+# Help directory for the PCCDPACK package
+#
+# Set. 02
+#
+
+$doc               = "/home/claudiavr/iraf/pccdpack/doc/"
+
+macrol             hlp =doc$macrol.hlp,      src = macrol.cl
+ordem              hlp =doc$ordem.hlp,       src = ordem.cl
+pccd               hlp =doc$pccd.hlp,        src = pccd.cl
+select             hlp =doc$select.hlp,      src = select.cl
+pccdgen            hlp =doc$pccdgen.hlp,     src = pccdgen.cl
+graf               hlp =doc$graf.hlp,        src = graf.cl
+checkcen           hlp =doc$checkcen.hlp,    src = checkcen.cl
+coorshift          hlp =doc$coorshift.hlp,   src = coorshift.cl
+magnit             hlp =doc$magnit.hlp,      src = magnit.cl
+vecplot            hlp =doc$vecplot.hlp,     src = vecplot.cl
+refer              hlp =doc$refer.hlp,       src = refer.cl
+fintab             hlp =doc$fintab.hlp,      src = fintab.cl  

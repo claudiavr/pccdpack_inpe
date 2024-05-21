@@ -82,7 +82,8 @@ c
 c
 c lendo arquivos com fotometria
 c
-	open(8, file=arq_in, status='old')
+c	open(8,file=arq_in, status='old')
+	open(8)
 c
 	do i=1, nhw
 		do j=1, nstars

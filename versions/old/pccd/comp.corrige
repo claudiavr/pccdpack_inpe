@@ -1,0 +1,2 @@
+f77 -s -O3 -o corrige.exe corrige.f
+

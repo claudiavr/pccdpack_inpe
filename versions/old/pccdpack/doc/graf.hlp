@@ -1,0 +1,105 @@
+.help graf Nov02 pccdpack
+.ih
+NAME
+graf -- plot the polarization modulation for one star.
+.ih
+USAGE
+graf filein starin aperturein
+.ih
+PARAMETERS
+.ls filein [string]
+The 'pccd' polarimetry data file (.log)
+.le
+.ls starin [integer]
+Star number to analyse in 'filein'.
+.le
+.ls aperturein [integer]
+Aperture to analyze for "starin". The aperture must be in pixels as
+in 'filein'.
+.le
+.ls (postype) = no [boolean]
+This parameter works just when eight (8) waveplate positions was used.
+If 'postype' = yes, the plot is assumed with the first eight positions
+used [1-8]. If "postype" = no, the plot is assumed with eight position
+not contiguous: the first four and the nine to twelve positions
+[1-4,9-12].
+.le
+.ls (metafile = no) [boolean]
+If 'metafile' = yes, one metacode file for the plot is created. The
+name will be 'filein' with ".mc" extension. If this file already exits,
+it will be overwritten.
+.le
+.ih
+DESCRIPTION
+GRAF permits a graphical check for the polarization modulation fitting
+done for any of stars in a given field by 'pccd' task. The
+polarization modulation is plotted for the specified star ('starin'
+parameter) and aperture ('aperture' parameter) obtained from the
+'pccd' output file that contains the polarimetry data ('filein'
+parameter). This important, for example, to check the fitting of
+Q and U Stokes parameters for the aperture selected by 'macrol' task.
+The sequence of used waveplate position is controlled by 'postype'
+parameter. If a metacode file is desired from the output graphic,
+'metalfile' must be "yes".
+
+The output plot consists of a header with the polarimetry parameters
+as appeared in 'filein' for the star and aperture selected, and
+the fitting. The dashed line represents the least-squares fitting
+obtained and each measurement (in each waveplate position) is
+indicated by an "x" with its error (SIGMA).
+
+.ih
+EXAMPLES
+1. Run graf with parameters in command line.
+
+.nf
+pc> graf 15.log 393 3
+Analyzing file...
+ STAR # 393
+ APERTURE =  3.0
+    Q        U        SIGMA        P    THETA SIGMAtheor.
+    .02293  -.12903   .08974   .13105   40.0     .0770
+
+  Z(I)= Q*cos(4psi(I)) + U*sin(4psi(I))
+  -.06774 -.04024 -.11360  .21783
+
+Warning: Attempt to delete a nonexistent file (15.log.mc)
+.fi
+
+
+2. Run graf without parameters in command line. A typical parameters
+set is showed.
+
+.nf
+pc> lpar graf
+       filein = "15.log"        input pccd file (.log)
+       starin = 393             star number to analyze
+   aperturein = 3               aperture to analyze
+     (postype = no)             positions of wave-plate are contiguous?
+    (metafile = yes)            create output metacode file?
+       (flist = "")
+        (mode = "al")
+
+pc> graf
+star number to analyze (393):
+aperture to analyze (3):
+input pccd file (.log) (15.log):
+Analyzing file...
+ STAR # 393
+ APERTURE =  3.0
+    Q        U        SIGMA        P    THETA SIGMAtheor.
+    .02293  -.12903   .08974   .13105   40.0     .0770
+
+  Z(I)= Q*cos(4psi(I)) + U*sin(4psi(I))
+  -.06774 -.04024 -.11360  .21783
+
+Warning: Attempt to delete a nonexistent file (15.log.mc)
+.fi
+
+.ih
+TIME REQUIREMENTS
+.ih
+BUGS
+.ih
+SEE ALSO
+.endhelp

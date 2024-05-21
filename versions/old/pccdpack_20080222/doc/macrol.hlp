@@ -1,0 +1,83 @@
+.help macrol Nov02 pccdpack
+.ih
+NAME
+macrol -- Extract the polarimetry data for the aperture with the small
+error.
+.ih
+USAGE
+macrol
+.ih
+PARAMETERS
+.ls (file_in) [string]
+Polarimetry data file (.log) from pccd to edit.
+.le
+.ls (file_out) [string]
+Output file with the polarimetry data filtered by the small error. A
+extension ".out" will be added. If this file already exists, it will
+be overwritten.
+.ih
+DESCRIPTION
+MACROL extracts the polarimetry data from the aperture with the
+small least-squares fitting error (SIGMA) for each star from the
+output file of 'pccd' task (.log file). The aperture selected
+corresponds to the first minimum. For dim stars, generally the aperture selected is ~ FWHM; and for
+bright stars, is ~ (2-3)*FWHM.
+.sp
+MACROL reads directly the number of stars, positions of wave-plate and
+apertures used from the the header of .log file. The output file
+('file_out' parameter) will have a ".out" extension added. It consists
+of eight columns: Q and U Stoke's parameters; the polarization error
+(SIGMA); the polarization value (P); the polarization angle (THETA);
+the theoretical error (SIGMAtheor.); the aperture selected
+(APERTURE); and, the star identification (STAR).
+.ih
+EXAMPLES
+1. Run macrol. A typical parameters set is showed. In this example,
+the total number of stars analyzed is 393 and the total number of
+apertures for each star analyzed is 10.
+
+.nf
+pc> lpar macrol
+      file_in = "15.log"        pccd output file (.log)
+    (file_out = "test")         output file (.out)
+       (flist = "")
+        (mode = "ql")
+
+pc> macrol
+Warning: Attempt to delete a nonexistent file (test.out)
+pccd output file (.log) (15.log):
+Evaluating...star 1  of 393 , aperture 1.  of 10.
+Evaluating...star 1  of 393 , aperture 2.  of 10.
+Evaluating...star 1  of 393 , aperture 3.  of 10.
+Evaluating...star 1  of 393 , aperture 4.  of 10.
+Evaluating...star 1  of 393 , aperture 5.  of 10.
+Evaluating...star 1  of 393 , aperture 6.  of 10.
+Evaluating...star 1  of 393 , aperture 7.  of 10.
+Evaluating...star 1  of 393 , aperture 8.  of 10.
+Evaluating...star 1  of 393 , aperture 9.  of 10.
+Evaluating...star 1  of 393 , aperture 10.  of 10.
+Evaluating...star 2  of 393 , aperture 1.  of 10.
+Evaluating...star 2  of 393 , aperture 2.  of 10.
+Evaluating...star 2  of 393 , aperture 3.  of 10.
+Evaluating...star 2  of 393 , aperture 4.  of 10.
+Evaluating...star 2  of 393 , aperture 5.  of 10.
+Evaluating...star 2  of 393 , aperture 6.  of 10.
+Evaluating...star 2  of 393 , aperture 7.  of 10.
+Evaluating...star 2  of 393 , aperture 8.  of 10.
+Evaluating...star 2  of 393 , aperture 9.  of 10.
+Evaluating...star 2  of 393 , aperture 10.  of 10.
+...
+.fi
+
+2. Redirect the output text to a file ("log", in this example).
+
+.nf
+pc> macrol > log
+.fi
+.ih
+TIME REQUIREMENTS
+.ih
+BUGS
+.ih
+SEE ALSO
+.endhelp

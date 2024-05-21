@@ -1,0 +1,251 @@
+.help select Oct02 pccdpack
+.ih
+NAME
+select -- select stars using several conditions.
+.ih
+USAGE
+select file_out file_ord
+.ih
+PARAMETERS
+.ls file_out [string]
+Input file (.out) with polarimetric data. This file is the output
+file of 'macrol' task.
+.le
+.ls file_ord [string]
+Input file (.ord) with pixel coordinates. This files is the output
+file of 'ordem' task.
+.le
+.ls (file_sel) [string]
+Output file with selected data. 'file_sel' must have '.sel'
+extension.
+.le
+.ls (polmin = 3) [real]
+Minimum value of S/N (= P/SIGMA) polarization ratio for the
+selected data.
+.le
+.ls (polinf = 0) [real]
+Minimum value of polarization (P) for the selected data. Range:
+(0 - 1). 1 means 100% of polarization.
+.le
+.ls (polmax = 1) [real]
+Maximum value of polarization (P) for the selected data. Range:
+(0 - 1). 1 means 100% of polarization. 'polmax' must be higher
+than 'polinf'.
+.le
+.ls (maiors = no) [boolean]
+If 'maiors' = no (default value), the S/N polarization ratio is
+calculated using SIGMA (fit error). If 'maiors' = yes, S/N
+polarization ratio is calculated using the higher value between
+SIGMA and SIGMAtheor (theoretical error).
+.le
+.ls (stheomax = 1) [real]
+Maximum value for SIGMAtheor for the selected data. Range: (0 - 1).
+1 means 100% of polarization. The default value is 1.
+.le
+.ls (thetainf = 0) [real]
+Minimum value of polarization angle (THETA) for the selected data.
+Range: (0 - 180) in degrees.
+.le
+.ls (thetasup = 180) [real]
+Maximum value of polarization angle (THETA) for the selected data.
+Range: (0 - 180) in degrees.
+.le
+.ls (deltatheta = 0) [real]
+Additive correction in THETA for the selected data. In degrees.
+.le
+.ls (coorq = 0) [real]
+Additive correction in Q Stoke parameter for the selected data.
+Range: (0 - 1). 1 means 100% of polarization on Q.
+.le
+.ls (cooru = 0) [real]
+Additive correction in U Stoke parameter for the selected data.
+Range: (0 - 1). 1 means 100% of polarization on U.
+.le
+.ls (xpixmax = 1000) [real]
+Size of CCD in X-axis. In pixels.
+.le
+.ls (ypixmax = 1000) [real]
+Size of CCD in Y-axis. In pixels.
+.le
+.ls (outgraph = no) [boolean]
+If 'outgraph' = yes, will be created a postscript file from graphic
+output. The name will be 'file_sel.eps'.
+.le
+.ls (vecconst = constant) [string]
+Scale of polarization vectors for plot (b) in graphic output. If
+'vecconst' = constant, all vectors will have the same size. If
+'vecconst' is any integer value, the size of vectors is properly
+modified using this value. For data with P < 10% , a good
+initial value to test usually will be 1000. This parameter is
+equivalent to 'magscale' parameter of 'fieldplot' task of
+'stsdas.graphics.stplot'.
+.le
+.ls (norte = right) [string, allowed values: right | left | top | bottom ]
+North position in CCD field.
+.le
+.ls (leste = top) [string, allowed values: right | left | top | bottom ]
+East position in CCD field.
+.le
+.ls (binpol = 0.01) [real]
+Width of bin for polarization histogram - plot (d) in graphic
+output. 1 means 100% of polarization.
+.le
+.ls (thetafit = no) [boolean]
+If 'thetafit' = yes, a Gaussian fit will be done over
+polarization angle histogram - plot (c) in graphic output.
+.le
+.ls (gaussparst = gausspars) [pset]
+These are the control parameters for the fit in polarization angle
+histogram. This is a link to pset file 'gausspars' included in
+'ngaussfit' task (stsdas.analysis.fitting). To edit type ':e'.
+.le
+.ls (bintheta = 5) [real]
+Width of bin for polarization angle histogram - plot (c) in graphic
+output. In degrees.
+.le
+.ls (thetamin = 0) [real]
+Lower (left) limit in polarization angle histogram to control the
+graphic output - plot (c). Range (-90 to 0). The range between
+'thetamin' and 'thetamax' must be 180 degrees. For example: if
+'thetamin' = -30 then 'thetamax' must be 150.
+.le
+.ls (thetamax = 180) [real]
+Higher (right) limit in polarization angle histogram to control the
+graphic output - plot (c). Range (90 to 180). The range between
+'thetamin' and 'thetamax' must be 180 degrees. For example: if
+'thetamin' = -30 then 'thetamax' must be 150.
+.le
+.ls (starelim = " ") [string]
+File name with object numbers (STAR) to eliminate explicitly from
+selected data. Each row in 'starelim' corresponds to one object and
+begins with STAR identification (it could be obtained from the last
+column in 'file_out' file).
+.le
+.ls (meanvalue = yes) [boolean]
+If 'meanvalue' = yes, print the statistics information for the
+selected data. The information is printed to the right of Q vs. U
+plot in graphic output - plot (a). It consists of the mean values of
+the Stokes parameters (Q and U), the polarization (P), the error (s)
+and the polarization angle (theta) for the selected data.
+.le
+.ih
+DESCRIPTION
+This task permits a detailed analysis of polarimetry for point
+objects in crowded stellar fields. It uses the 'file_out' file with
+polarimetric data (obtained by 'macrol' task) and the 'file_ord' file
+with pixel coordinates (obtained with 'ordem' task) for a given CCD
+field.
+
+The main criteria to filter a sample is the S/N polarization
+ratio defined by user by 'polmin' parameter. All the objects with
+a S/N higher that 'polmin' will be selected. The S/N polarization
+ratio is P/SIGMA when 'maiors'=no. If 'maiors'=yes, SIGMA is
+replaced by the higher value between SIGMA and SIGMAtheor.
+
+A limit condition about the theoretical error (SIGMAtheor) could be
+imposed with 'stheomax' parameter. Data with SIGMAtheor <= 'stheomax'
+only will be included in the final sample.
+
+Another criteria to filter the sample is the polarization value (P)
+and the polarization angle (theta). Only objects with (P) between
+'polinf' and 'polmax' and (theta) between 'thetainf' and 'thetasup'
+will be considered in the final sample.
+
+If a correction in polarization angle (THETA) for the all objects
+in the sample is desired, it must be included in 'deltatheta'
+parameter (in degrees). The additive correction will be:
+
+THETA(new) = THETA(old) + delthatheta
+
+The Q and U Stoke's parameters for each object in the sample are
+recalculated using this new THETA. The relations used are:
+
+Q = P*cos(2*THETA)    and    U = P*sin(2*THETA)
+
+If individual corrections in Q and U Stoke's parameters are needed,
+they could be included in 'coorq' and 'cooru' parameters. The
+additive corrections will be:
+
+Q(new) = Q(old) + coorq    and    U(new) = U(old) + cooru
+
+The polarization (P) and its angle (THETA) are recalculated using
+these new Q and U values. The relations used are:
+
+P = sqrt(Q^2 + U^2)   and    THETA = (1/2)*arctan(U/Q)
+
+When individual objects are needed to exclude for the final sample,
+it could be use the 'starelim' file. This is a ASCII file with the
+STAR identification to eliminate in each row.
+
+Output File
+.ls
+The output file is set by 'file_sel' parameter and must have
+a ".sel" extension. The first line of 'file_sel' has information
+about the selected data in this order: the polarization range used
+('polinf' < p < 'polmax'); the minimum signal-to-noise polarization
+ratio used (p/sigma(p) > 'polmin'); the additive correction in THETA
+used (dt 'deltatheta'); the additive correction in Q used (cQ
+ 'coorq');
+the additive correction in U used (cU 'cooru'); and, the
+polarization angle range used ('thetainf' < theta < 'thetasup').
+
+The second line is the header with the followinf fields: XCENTER and
+YCENTER, are the pixel coordinates corrected to the equatorial system
+(as appeared in panel (b)); P is the polarization value; THETA is
+the polarization angle corrected, if 'deltaheta' is not zero
+(measured in equatorial system, from the north to the east); Q and U,
+are Stoke's parameters corrected if 'coorq' and 'cooru' are not zero;
+SIGMA is the polarization error; ID is the identification number for
+the ordinary image of a given star in 'phot' magnitude file (*.mag.1,
+for example); APERTURE is the aperture used for the polarization
+calculus; and, STAR is the star number as appeared in 'macrol'
+output file.
+
+The next lines are the polarimetry data for the selected sample,
+one line for each object. The last two lines are pixel coordinates
+for the left bottom (origin) and the right top corners of CCD used.
+The rest of fields for these two lines are blanked.
+.le
+
+Graphic Output
+.ls
+The graphic output consists in four panels showing the
+statistic analysis of selected data.
+
+In panel (a), it is showed the Stoke's parameters distribution
+in the sample. Additional statistic information is showed when
+'meanvalue' = yes.
+
+In panel (b), it is showed the spatial distribution of the
+polarization vectors over the equivalent CCD area. North is
+up and East is to the left. The correct transformation to
+equatorial coordinates for the position of polarization vectors
+is constructed using the 'norte' and 'leste' parameters and the CCD
+size ('xpixmax' and 'ypixmax' parameters). The polarization scale
+is showed up to the right.
+
+In panel (c), it is showed the polarization angles histogram. It is
+useful to distinguish any preferential orientation for the
+polarization vectors. The bin width (in degrees) is set by 'bintheta'
+parameter. North is in 'theta' = 0 and East in 'theta' = 90. The left
+and right limits of the histogram are set with 'thetamin' and
+'thetamax' parameters. If 'thetafit' = yes, a (multi) Gaussian(s)
+fit is used for the data. This fitting is controlled by 'gaussparst'
+parameter with the initial values for the amplitude, center and fwhm
+for each Gaussian used (see 'gausspars' man help).
+
+Finally, in panel (d), it is showed the polarization histogram. The
+right limit is controlled by 'polmax' parameter. The bin width is
+set by 'binpol' parameter (in units of normalized polarization,
+1 = 100%).
+.le
+.ih
+EXAMPLES
+pc> select teste.out teste.ord
+.ih
+TIME REQUIREMENTS
+.ih
+BUGS
+.ih
+SEE ALSO
+.endhelp

@@ -1,0 +1,106 @@
+.help checkcen Set02 pccdpack
+.ih
+NAME
+checkcen -- evaluate individual stars in each waveplate position
+frame.
+.ih
+USAGE
+checkcen files_mag star aperture
+.ih
+PARAMETERS
+.ls files_mag
+Input "phot" magnitude files for each waveplate frame used. For
+example, if the sequence of magnitude files has the extension
+".mag.1", it must be used "files_mag" = *.mag.1 . For just one
+waveplate position to evaluate maintain "files_mag" = *.mag.1. The
+list key (@) is not yet implemented. The original "fits" images
+used to calculate the "phot" files must be in the same directory.
+.le
+.ls star
+Star number to analyse. The star number is obtained from the
+output file (.log) of "pccd" task. It also could be obtained from
+the output file (.out) of "macrol" task for a selected aperture.
+.le
+.ls aperture
+Aperture of "star" to analyse. As "star", it could be obtained from
+(.log) or (.out) file. The aperture is in pixels.
+.le
+.ls cont
+Control parameter, it must be "yes".
+.le
+.ih
+DESCRIPTION
+Evaluate individual stars plotting the radial profiles for the
+ordinary and extraordinary images for a set of waveplate postions
+frames.
+
+The task needs that "phot" files (*.mag.?) and their original "fits"
+(.imh or .fits) files put in the same directory.
+
+The specified star (with "star" and "aperture" parameters) is
+evaluated reading the information from each "phot" magnitude file
+(*.mag.?) in each waveplate position frame. The analysis steps are:
+
+1. Show the photometric parameters (image, id, annulus, dannulus,
+msky, nsky, raper, sum, area and flux) for the ordinary (ord) and
+extraordinary (extra) images of the specified star for all
+the waveplate positions frames:
+
+1st. pos. (ord)
+1st. pos. (extra)
+2nd. pos. (ord)
+2nd. pos. (extra)
+...
+...
+
+where flux = sum - (area*msky)
+
+Hit <enter> to continue.
+
+2. Display the first waveplate position frame in your image browser
+(ds9, as example).
+
+3. Mark with two red concentric circles the original position
+(xinit,yinit) for the ordinary image. The radius of the first
+circle corresponds to the "annulus" and the radius of the second
+circle corresponds to the ("annulus" + "dannulus"). The (image, xinit
+and yinit) parameters are showed.
+
+Hit <enter> to continue.
+
+4. Mark with two green concentric circles the final position (xcenter,
+ycenter) for the ordinary image. The radius are as in 3. This is to
+check if the center option of "phot" task (i.e. if
+centerpars.calgorith parameter was set different that "none") makes
+a wrong work selecting as center a neighborhood star. The (image,
+xcenter and ycenter) parameters are showed.
+
+5. Plot the radial profile for the ordinary image at the final
+position. The limit of the abscissa axis is ("annulus" + "dannulus").
+In this point, must be checked for contamination of neighborhood
+stars.
+
+Hit <enter> to continue.
+
+6. Zoom the radial profile for the ordinary image at the final
+position. The limit of the abscissa axis is 12 pixels. In this point,
+careful inspection for contamination for the lower apertures must be
+done. Special care have to be done with hot pixel inside the aperture
+used. The photometric parameters are showed again.
+
+Hit <enter> to continue.
+
+7. Repeat 3 to 6 for the extraordinary image.
+
+8. Repeat 2 for the next waveplate position frame.
+
+.ih
+EXAMPLES
+checkcen *.mag.1 10 4
+.ih
+TIME REQUIREMENTS
+.ih
+BUGS
+.ih
+SEE ALSO
+.endhelp

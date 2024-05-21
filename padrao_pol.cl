@@ -113,13 +113,8 @@ begin
 	while(coofaz==yes){
 		display(image=imagem,frame=1)
 		print(" ")
-#		print("Achando as coordenadas da estrela padrao...")
 		print("Estimating the standard star coordinates...")
 		print(" ")
-#		print("Aponte a estrela padrao")
-#		print("Primeiro o objeto inferior e depois o superior")
-#		print("Use a letra A para marcar")
-#		print("Use a letra Q para sair")
 		print("Find the two images of the object.")
 		print("With the mouse over the bottom image, type a.")
 		print("With the mouse over the top image, type a.")
@@ -257,6 +252,7 @@ begin
         vtmpfile = mktemp ("/tmp/tmpvar")
         files (varima, > vtmpfile)
         flist1 = vtmpfile
+        delete(vtmpfile,ver-)
         #
         varima="@inord"
         vtmpfile = mktemp ("/tmp/tmpvar")
@@ -328,7 +324,7 @@ begin
 	print("The polarization of your standard is:")
 	type(input_fi=object//".out")
 	
-	#delete(temp3,ver-)
+	delete(vtmpfile,ver-)
 	#delete(temp2,ver-)
 	print(" ") 	
 end
