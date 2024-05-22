@@ -1,1 +1,0 @@
-f77 -s -O3 -o vccd_sig.exe vccd_sig.f
