@@ -71,14 +71,14 @@ begin
 	delete(arqmac,ver-)
 	delete(outlog//"*",ver-)
 
-    print('Pulando varias linhas, pois stsdas e tables não estão funcionando')
-    goto fim
+    #print('Pulando varias linhas, pois stsdas e tables não estão funcionando')
+    #goto fim
     
     file_full0      = mktemp("tmp$full0")
 	file_rms        = mktemp("tmp$rms")
 	file_final      = mktemp("tmp$final")
 
-    lixo = scan(lixo)
+    # lixo = scan(lixo)
 
 ######
 # criando tabela com resultados do macrol
@@ -121,7 +121,9 @@ begin
 	concatenate(file_header//","//file_full1, file_final)
 #	unlearn tmerge
 #    tmerge(file_header//","//file_full1,file_final,"app")
-    type(file_final)
+#    print("oi")
+#    print(file_final)
+#    type(file_final)
     del(outmac//".out",ver-)
     copy(file_final,outmac//".out")
 
@@ -129,13 +131,15 @@ begin
     del(file_full1,ver-)
     del(file_header,ver-)
 	del(file_rms,ver-)
-	del(tab_macrol//".tab",ver-)
-	del(tab_zero//".tab",ver-)
+	#del(tab_macrol//".tab",ver-)
+	#del(tab_zero//".tab",ver-)
+	del(tab_macrol,ver-)
+	del(tab_zero,ver-)
 	del(file_final,ver-)
 	del(file_zero,ver-)
 	stty ncols=80
-fim:
-	print("     ")	
+#fim:
+#	print("     ")	
 	end
 
 

@@ -65,7 +65,7 @@
 	task	soma_iv			= "pccdpack_inpe$soma_iv.cl"
 	task	sel_ftb			= "pccdpack_inpe$sel_ftb.cl"
 	task	time_pol		= "pccdpack_inpe$time_pol.cl"	
-	task	zerofind_inpe	= "pccdpack_inpe$zerofind_inpe.cl"
+	task	zerofind		= "pccdpack_inpe$zerofind.cl"
 	
 ### Parameter set ###
 
