@@ -421,12 +421,8 @@ if ((nimage!=4) && (nimage!=8) && (nimage!=16)) {
 # 
 #### finding out the number of stars
 #
-		print ("oi 1")
-#		tstat("dat.001",2,outtabl="llixo")
-#		print ("oi 2")
-#		nestrelas=tstat.nrows/(nimage*2)
-		nestrelas=9		
-		print(nestrelas)
+		tstat("dat.001",2,outtabl="llixo")
+		nestrelas=tstat.nrows/(nimage*2)
 		delete("llixo.tab",ver-)		
 		#
 #

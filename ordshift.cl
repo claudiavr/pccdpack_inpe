@@ -55,7 +55,7 @@ begin
      while (fscan(flist,line1) != EOF) {
                  linedata1 = fscan(line1,xcenter1,ycenter1,id1)
                  nlines += 1
-                 print(nlines,xcenter1,ycenter1)
+                 # print(nlines,xcenter1,ycenter1)
                  if (nlines > 30000) {
                                  error (1,"More than 30000 stars!")
                  }
@@ -70,7 +70,7 @@ begin
      print("Analyzing file...")
 
      temp1 = mktemp("tmp$coor")
-     print(temp1)
+     # print(temp1)
       
      if (corrige == yes) {
      
@@ -98,17 +98,13 @@ begin
          
          flist = coorfile
          print("#XCENTER YCENTER ID", >> temp1)
-         print("oi 1")
-         print(coorfile)
          while (fscan(flist,line1) != EOF) {
-             print("oi 2")
-             print(nl)
              if (nl > 0) {
                  linedata1 = fscan(line1,xcenter1,ycenter1,id1)
                  linedata2 = fscan(flist,line2) 
                  linedata2 = fscan(line2,xcenter2,ycenter2,id2)
-                 print (line1)
-                 print (xcenter1,xcenter2,ycenter1,ycenter2)                 
+                 # print (line1)
+                 # print (xcenter1,xcenter2,ycenter1,ycenter2)                 
                  xlimmin = deltax + xshiftmax
                  ylimmin = deltay + yshiftmax
                  xlimmax = xside + xshiftmin - deltax
@@ -124,12 +120,12 @@ begin
              nl += 1
          }    
              
-     print(" ")
-     print("Shifts  (Xmin,Xmax,Ymin,Ymax) : ", xshiftmin, " ", xshiftmax, " ", yshiftmin, " ", yshiftmax)
-     print("delta   (X,Y) : ",deltax," ",deltay)      
-     print("Limits  (Xmin,Xmax,Ymin,Ymax) : ",xlimmin," ",xlimmax," ",ylimmin," ",ylimmax)
-     print("Remaining objects ",nlc)
-     print(" ")
+     # print(" ")
+     # print("Shifts  (Xmin,Xmax,Ymin,Ymax) : ", xshiftmin, " ", xshiftmax, " ", yshiftmin, " ", yshiftmax)
+     # print("delta   (X,Y) : ",deltax," ",deltay)      
+     # print("Limits  (Xmin,Xmax,Ymin,Ymax) : ",xlimmin," ",xlimmax," ",ylimmin," ",ylimmax)
+     # print("Remaining objects ",nlc)
+     # print(" ")
      
      del(coorfile,ver-)
      copy(temp1,coorfile)

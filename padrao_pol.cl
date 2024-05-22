@@ -252,7 +252,7 @@ begin
         vtmpfile = mktemp ("/tmp/tmpvar")
         files (varima, > vtmpfile)
         flist1 = vtmpfile
-        delete(vtmpfile,ver-)
+        #delete(vtmpfile,ver-)
         #
         varima="@inord"
         vtmpfile = mktemp ("/tmp/tmpvar")

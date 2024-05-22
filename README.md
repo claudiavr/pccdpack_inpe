@@ -2,7 +2,7 @@
  
 ## Introduction
 
-The pccdpack_inpe repository has a set of IRAF routines to polarimetric reduction of data obtained using the IAGPOL polarimeter. It is heavily based on the original pccdpack package developed by Antonio Pereyra.
+The pccdpack_inpe repository has a set of IRAF routines to polarimetric reduction of data obtained using the IAGPOL or SPARC4 instruments. It is heavily based on the original pccdpack package developed by Antonio Pereyra.
 
 ## Developers
 
@@ -10,10 +10,10 @@ Many routines were originally written by Antonio Pereyra with the collaboration 
 
 Development at INPE were done by:
 Claudia Vilega Rodrigues
-Victor de Souza Magalhães
+Victor de Souza Magalhaes
 Karleyne M. G. de Souza
 
-## Installation
+## Installation and other comments
 
 No IRAF V2.18, MacOS, os pacotes externos (e portanto o diretório do pccdpack) devem ser colocados no diretório:
 
@@ -29,14 +29,30 @@ Nova versao do IRAF: https://iraf.noirlab.edu/
 
 https://arxiv.org/abs/2401.01982
 
+A Claudia, usando o MacOS, só conseguir interacao com a imagem no XImtool. Isto eh, nao consegui selecionar estrelas na imagem no DS9.
 
 ## Versioning
 
-2024-05-22 - Zerofind_inpe corrected to work in IRAF V2.18.
-			 Task zerofind_inpe renamed to zerofind._
-			 Padrao_pol tested.
+2024-05-22b
+
+	Bug correction in padrao_pol
+	
+	time_pol tested and corrected where necessary. Working okay if you have phot_pol_e.e
+	
+	plota_pol tested
+	
+    plota_luz tested
+	
+	_
+2024-05-22
+
+	Zerofind_inpe corrected to work in IRAF V2.18.
+
+	Task zerofind_inpe renamed to zerofind._
+
+	Padrao_pol tested.
 			 _
-2024-05-19 - Modified to work in IRAF V2.18
+	2024-05-19 - Modified to work in IRAF V2.18
 
 2023-11-02 - Bug correction.
 
