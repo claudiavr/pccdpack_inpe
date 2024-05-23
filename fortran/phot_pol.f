@@ -39,30 +39,40 @@ c
 c
 c	lendo parametros da linha de comando
 c
-	call clnarg(nargs)
-	if (nargs.eq.8) then
-		call clargc(1,arq_in,ier)
-		if (ier.ne.0) goto 100
-		call clargc(2,arq_out,ier)
-		if (ier.ne.0) goto 100
-		call clargi(3,nstars,ier)
-		if (ier.ne.0) goto 100
-		call clargi(4,nhw,ier)
-		if (ier.ne.0) goto 100
-		call clargi(5,nap,ier)
-		if (ier.ne.0) goto 100
-		call clargi(6,comp,ier)
-		if (ier.ne.0) goto 100
-		call clargi(7,nout,ier)
-		if (ier.ne.0) goto 100
-		call clargr(8,ganho,ier)
-		if (ier.ne.0) goto 100
-	else
-		write(*,*)'No. de parametros incorreto em PHOT_POL'
-		write(*,*)' '
-		write(*,*)'Uso: phot_pol ??? '
-		goto 110
-	endif
+Ccall clnarg(nargs)
+Cif (nargs.eq.8) then
+C	call clargc(1,arq_in,ier)
+C	if (ier.ne.0) goto 100
+C	call clargc(2,arq_out,ier)
+C	if (ier.ne.0) goto 100
+C	call clargi(3,nstars,ier)
+C	if (ier.ne.0) goto 100
+C	call clargi(4,nhw,ier)
+C	if (ier.ne.0) goto 100
+C	call clargi(5,nap,ier)
+C	if (ier.ne.0) goto 100
+C	call clargi(6,comp,ier)
+C	if (ier.ne.0) goto 100
+C	call clargi(7,nout,ier)
+C	if (ier.ne.0) goto 100
+C	call clargr(8,ganho,ier)
+C	if (ier.ne.0) goto 100
+Celse
+C	write(*,*)'No. de parametros incorreto em PHOT_POL'
+C	write(*,*)' '
+C	write(*,*)'Uso: phot_pol ??? '
+C	goto 110
+Cendif
+	
+	read *, arq_in
+	read *, arq_out
+	read *, nstars
+	read *, nhw
+	read *, nap
+	read *, comp
+	read *, nout
+	read *, ganho	
+	
 c
 c	Verificando se valores de variaveis estao dentro do intervalo
 c		permitido
@@ -82,7 +92,7 @@ c
 c
 c lendo arquivos com fotometria
 c
-	open(8, file=arq_in, status='old')
+	open(8,file=arq_in, status='old')
 c
 	do i=1, nhw
 		do j=1, nstars

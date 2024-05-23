@@ -32,7 +32,7 @@
 	print ('apphot')
 #		
 	set     pccdpack_inpe          = "/Users/claudiarodrigues/pccdpack_inpe/git/"
-#	set		inpe_fortran		   = "pccdpack_inpe$fortran/"
+	set		inpe_fortran		   = "/Users/claudiarodrigues/pccdpack_inpe/git/fortran/"
 #
 	package pccdpack_inpe
 #
@@ -81,7 +81,9 @@
 	task    $phot_pol_e     = "$/Users/claudiarodrigues/pccdpack_inpe/git/fortran/phot_pol_e.e $(*)"
 	task	$limpa_mapa		= "$/Users/claudiarodrigues/pccdpack_inpe/git/fortran/limpa_mapa.e $(*)"
 	
-	pccdgen_inpe.fileexe = "/Users/claudiarodrigues/pccdpack_inpe/git/fortran/pccd4000gen24.e"
+	pccdgen_inpe.fileexe = "inpe_fortran$pccd4000gen24.e"
+	
+#	phot_pol.photexe = "inpe_fortran$phot_pol.e"
 
 	clbye()
 end

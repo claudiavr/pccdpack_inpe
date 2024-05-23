@@ -529,11 +529,11 @@ if ((nimage!=4) && (nimage!=8) && (nimage!=16)) {
  		txdump(textfiles="*.mag.1",fields="image, msky, nsky, rapert, sum, area", \
  			expr="yes", > object//".pht")
 #
-#		tstat(object//".pht",2,outtabl="llixo")
-#		nestrelas=tstat.nrows/(nume_lam*2)
+		tstat(object//".pht",2,outtabl="llixo")
+		nestrelas=tstat.nrows/(nume_lam*2)
 #		nestrelas=3
 #		print(nestrelas)
-		delete("llixo.tab",ver-)		
+#		delete("llixo.tab",ver-)		
         unlearn phot_pol		
         pccdpack_inpe.phot_pol(file_in = object//".pht", file_out = object//".luz", \
           nstars = nestrelas , nhw = nume_lam, nap= nab, comp=2, star_out=0 , ganho= gan) 

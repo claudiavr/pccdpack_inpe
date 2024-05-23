@@ -1,11 +1,4 @@
-Alguns codigos devem ser compilados no fortran do unix outros no fortran do IRAF.
-
-== DENTRO DO IRAF
-
--- fc (fortran do IRAF)
-
-phot_pol_e.f
-
+Alguns codigos devem ser compilados no fortran do unix, isto eh, fora do IRAF.
 
 == NO TERMINAL UNIX
 
@@ -14,6 +7,7 @@ phot_pol_e.f
 pccd4000*
 ordem_ie.f
 estat_cl.f90
+phot_pol.f
 
 gfortran -ffixed-line-length-132 pccd4000*.f -e XXX.e
 
