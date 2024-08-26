@@ -51,17 +51,17 @@ begin
 	real tt = 0
 	real t[2000],fase[2000]
 	int i,j,n,inicio,fim,sstar,aaper,emin,emax,tipo,nl,ie,ne,npos,nstar
-	string igifile,ttitle,aarqpht,tempofile,hjd,magfile
+	string igifile,ttitle,aarqpht,tempofile,hjd,magfile,ymagfile
 	bool cconecta,pphase,ppontos,eeps,nofirst,cont,conv_mag,limm
 	bool arq
-        real xmin,xmax,ymin,ymax,niv
-
+	real xmin,xmax,ymin,ymax,niv
+#
 
 	struct line,linedata
 #	struct line,linedata,line2,linedata2
 #
 	limm=lim
-        cconecta=conecta
+    cconecta=conecta
 #	eerros=erros
 	ppontos=pontos
 	ttitle=title
@@ -75,19 +75,20 @@ begin
 	arq=ffile
 	magfile=mmagfile
 	conv_mag=convert_mag
-        tipo=3
-        niv=deltamag
-              
+    tipo=3
+    niv=deltamag          
 #
 	cont=yes
 	nofirst=no
 #
 	igifile = "igi_in"
 	tempofile="ttfile"
-     	delete(tempofile,ver-)
-     	delete("dlist.lllixo*",ver-)
-     	delete("lllixo*",ver-)
-        if (arq) 
+	ymagfile="ymagfile"
+    delete(tempofile,ver-)
+    delete(ymagfile,ver-)
+    delete("dlist.lllixo*",ver-)
+    delete("lllixo*",ver-)
+    if (arq) 
 	    delete(magfile,ver-)
 #
 # 	Lendo arquivo de entrada com tempos
@@ -111,21 +112,21 @@ begin
 #       Descobrindo o numero de estrelas (ne) e posicoes da lamina (npos)
 #       do arquivo *.luz
 #
-        flist=aarqpht
+    flist=aarqpht
 #	
-        npos=0
-        while (fscan(flist, line) != EOF) {
-        linedata=fscan(line,ne)
-	npos=npos+1
-        }
+    npos=0
+    while (fscan(flist, line) != EOF) {
+    	linedata=fscan(line,ne)
+		npos=npos+1
+    }
 	npos=(npos-(ne+3)*2)/(ne+1)-3
 	if (npos != n) {
-	  print(" ")
+	  	  print(" ")
           print("  Numero de posicao da lamina no pht: ",npos)
           print("  Numero de posicao da lamina no lis: ",n)
           print("  Numeros acima sao inconsistentes!")
-	  print(" ")
-	  goto erro
+	  	  print(" ")
+	      goto erro
 	}
 #         
 ########################################################	
@@ -147,17 +148,17 @@ begin
 	   xmin=0.
 	   xmax=1.
 	  }
-	 }
-	 else {
+	}
+	else {
           hjd=str(int(t[1]))
- 	  for (j=1; j <= n; j+=1) {
-           t[j]=t[j]-int(t[j])
+ 	      for (j=1; j <= n; j+=1) {
+            t[j]=t[j]-int(t[j])
 #           print (t[j])
-	   print (t[j], >> tempofile )
-	   xmin=t[1]
-	   xmax=t[n]
+	        print (t[j], >> tempofile )
+	        xmin=t[1]
+	        xmax=t[n]
           }
- 	 }
+ 	}
 #
 # Entrando no loop de display
 #
@@ -182,69 +183,69 @@ begin
              print("Choose numbers that define the correct range.")
              scan(ymin, ymax)
 	     emin=1
-             emax=ne
+         emax=ne
 	     print ("erase", >> igifile)
-             print ("window 1 1 1", >> igifile)
+         print ("window 1 1 1", >> igifile)
   	     print ("ptype 12 3", >> igifile)
-             print ("limits "//xmin//" "//xmax//" "//ymin//" "//ymax, >> igifile)
+         print ("limits "//xmin//" "//xmax//" "//ymin//" "//ymax, >> igifile)
 	     print ("margin 0.05", >> igifile)
-             print ("data "//tempofile, >> igifile)
-             print ("xcolumn 1", >> igifile)
-             print ("title "//ttitle//" - Apert: "//aaper-1, >>igifile)
-             if (pphase)
+         print ("data "//tempofile, >> igifile)
+         print ("xcolumn 1", >> igifile)
+         print ("title "//ttitle//" - Apert: "//aaper-1, >>igifile)
+         if (pphase)
                print ("xlabel Orbital phase", >> igifile)
                else
                print ("xlabel HJD - "//hjd,>> igifile)
-             if (conv_mag) {
-		 print ("yflip; box", >> igifile)
+         if (conv_mag) {
+		     print ("yflip; box", >> igifile)
 	         print ("ylabel \gD(mag)", >> igifile)
 		 } 
 		 else {
-  		  print ("box", >> igifile)
+  		 print ("box", >> igifile)
 	          print ("ylabel Relative Flux", >> igifile)
 	     }
-             for (ie=emin; ie<= emax; ie +=1) {
+         for (ie=emin; ie<= emax; ie +=1) {
 	       nstar=nstar+1
-               inicio=1+(ie-1)*n
+           inicio=1+(ie-1)*n
 	       fim=n+(ie-1)*n
-               print ("data "//aarqpht, >> igifile)
-               print ("lines "//inicio//" "//fim, >> igifile)
-               print ("ycolumn "//aaper, >> igifile)
-               if (conv_mag) {
+           print ("data "//aarqpht, >> igifile)
+           print ("lines "//inicio//" "//fim, >> igifile)
+           print ("ycolumn "//aaper, >> igifile)
+           if (conv_mag) {
                  print ("yevaluate -2.5*log10(y)+"//niv , >> igifile)
        	         print ("ylabel \gD(mag)", >> igifile)
-		 } 
-		 else {
+		   } 
+		   else {
 	          print ("ylabel Relative Flux", >> igifile)
 	       }
-               if (ppontos) {
+           if (ppontos) {
                  print ("expand 0.3", >> igifile)
                  print ("points ", >> igifile)
                  print ("expand 1.0", >> igifile)
-               }
-               if (cconecta)
+           }
+           if (cconecta)
                 print ("connect", >> igifile)
 #
 #
 	       delete("igi_tmp",ver-)
-     	       delete("dlist.lllixo",ver-)
-     	       delete("lllixo.*",ver-)
-               print ("data "//aarqpht, >> "igi_tmp")
-               print ("lines "//inicio//" "//fim, >> "igi_tmp")
-               print ("xcolumn "//aaper, >> "igi_tmp")
-               if (conv_mag) 
-	          print ("xevaluate -2.5*log10(x) + "//niv, >> "igi_tmp")
+     	   delete("dlist.lllixo",ver-)
+     	   delete("lllixo.*",ver-)
+           print ("data "//aarqpht, >> "igi_tmp")
+           print ("lines "//inicio//" "//fim, >> "igi_tmp")
+           print ("xcolumn "//aaper, >> "igi_tmp")
+           if (conv_mag) 
+	       print ("xevaluate -2.5*log10(x) + "//niv, >> "igi_tmp")
 	       print ("dlist dlist.lllixo", >> "igi_tmp")
 	       print ("end", >> "igi_tmp")
 	       igi < "igi_tmp"
-     	       print("  ")
-     	       print(" Estrela: ",nstar, "Abertura: ",(aaper-1))
-     	       print("   Average          Sigma           N")
+     	   print("  ")
+     	   print(" Estrela: ",nstar, "Abertura: ",(aaper-1))
+     	   print("   Average          Sigma           N")
 	       columns("dlist.lllixo",2,outroot="lllixo.")
 	       average < "lllixo.2"    
 #
-              } #fechando o for
-	      } # fechando o if compara
+        } #fechando o for
+	    } # fechando o if compara
 	else { # se eh uma estrela so a ser plotada
 #
 # *** ROTINA PARA UMA ESTRELA SO **********
@@ -259,17 +260,17 @@ begin
 #
 	print ("erase", >> igifile)
 	print ("ptype 7 3", >> igifile)
-        print ("data "//tempofile, >> igifile)
-        print ("xcolumn 1", >> igifile)
-        print ("data "//aarqpht, >> igifile)
-        print ("lines "//inicio//" "//fim, >> igifile
-        print ("window 1 1 1", >> igifile)
-        print ("ycolumn "//aaper, >> igifile)
-        if (conv_mag)
+    print ("data "//tempofile, >> igifile)
+    print ("xcolumn 1", >> igifile)
+    print ("data "//aarqpht, >> igifile)
+    print ("lines "//inicio//" "//fim, >> igifile
+    print ("window 1 1 1", >> igifile)
+    print ("ycolumn "//aaper, >> igifile)
+    if (conv_mag)
 		print ("yevaluate -2.5*log10(y)+"//niv, >> igifile)
   	delete("dlist.lllixo",ver-)
 	print ("dlist dlist.lllixo", >> igifile)
-     	print(" ")
+    print(" ")
 #     
 #Mudando o limite de y
 #   
@@ -309,20 +310,20 @@ begin
      	unlearn igi 
      	igi < igi_in
 	print(" ")  
-        delete("lllixo*",ver-)
+    delete("lllixo*",ver-)
 	if (sstar != 0) {
      	  print(" Estrela: ",sstar, "Abertura: ",(aaper-1))
      	  print("   Average          Sigma           N")
-	  columns("dlist.lllixo",3,outroot="lllixo.")
-	  average < "lllixo.3"    
-	  if (arq) {
-	    delete(magfile,ver-)
-	    joinlines(tempo,"lllixo.3",out=magfile)
-	  }
+	      columns("dlist.lllixo",3,outroot="lllixo.")
+	      average < "lllixo.3"    
+	      if (arq) {
+	        delete(magfile,ver-)
+	        joinlines(tempo,"lllixo.3",out=magfile)
+	      }
      	  delete("dlist.lllixo",ver-)
      	  delete("lllixo.3",ver-)
 	}
-        #
+#
 #
 #
 # criando metacode file
@@ -340,12 +341,12 @@ begin
         #
         print("Continua? Sim [y]; Nao [n]")
         scan (cont)
-        } # fecha o while (cont)
-     	delete(igifile,ver-)
-     	delete(tempofile,ver-)
-     	delete("dlist.lllixo",ver-)
-     	delete("lllixo.*",ver-)
-     	delete("lixo.lixo",ver-)
+    } # fecha o while (cont)
+    delete(igifile,ver-)
+    delete(tempofile,ver-)
+    delete("dlist.lllixo",ver-)
+    delete("lllixo.*",ver-)
+    delete("lixo.lixo",ver-)
 	delete("igi_tmp",ver-)
 	goto final
 erro:

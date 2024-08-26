@@ -246,9 +246,9 @@ begin
           q=100.*p[i]*cos(u)
           u=100.*p[i]*sin(u)
           if (plota[i]) print (hhjd[i],100.*p[i],100.*ep[i],t5,et[i],q,u, >> poldat)
-#		  print, 100.*p[i],sqrt(q*q+u*u)
-#		  print, t5,0.5*atan(u,q)
-#		  print, ' '
+		  #print, 100.*p[i],sqrt(q*q+u*u)
+		  #print, t5,0.5*atan(u,q)
+		  #print, ' '
           i=i+1
    	 }
    	 }
@@ -372,8 +372,8 @@ begin
           print ("location .075 .98 0.52 0.94 ", >> igifile)
         else
           print ("window 1 1 1", >> igifile)
-        print ("ycolumn 2;ecolumn 3", >> igifile)
-        print ("yevaluate y; eevaluate e", >> igifile)
+        print ("ycolumn 2; ecolumn 3", >> igifile)
+        #print ("yevaluate y; eevaluate e", >> igifile)
         if (pphase)
          print ("limits 0. 1. "//pmin//" "//pmax, >> igifile)
  	 	 else 
@@ -384,7 +384,7 @@ begin
           print ("box 0 2", >> igifile)
           else {
           print ("box", >> igifile)
-          if (pphase)
+        if (pphase)
            print ("xlabel Orbital phase", >> igifile)
            else
            print ("xlabel HJD - "//hjd,>> igifile)
@@ -485,7 +485,7 @@ begin
 	}
     if (cconecta)
           print ("connect", >> igifile)
-        print ("title "//ttitle, >>igifile)  
+          print ("title "//ttitle, >>igifile)  
 	#
 	# imprimindo pol.linear 
 	#
@@ -502,24 +502,24 @@ begin
          print ("limits "//t[1]//" "//t[n]//" "//pmin//" "//pmax, >> igifile)
         print ("margin 0.050", >> igifile)
         if (theta)
-          print ("box 0 2", >> igifile)
+            print ("box 0 2", >> igifile)
           else {
-          print ("box", >> igifile)
-          if (pphase)
-           print ("xlabel Orbital phase", >> igifile)
-           else
-           print ("xlabel HJD - "//hjd,>> igifile)
+            print ("box", >> igifile)
+            if (pphase)
+             print ("xlabel Orbital phase", >> igifile)
+             else
+             print ("xlabel HJD - "//hjd,>> igifile)
           }
-        print ("ylabel P(%)", >> igifile)
+           print ("ylabel P(%)", >> igifile)
         if (ppontos) {
-	  print ("expand 0.5", >> igifile)
+	  	  print ("expand 0.5", >> igifile)
           print ("points", >> igifile)
-	  print ("expand 1.0", >> igifile)
-	}
+	  	  print ("expand 1.0", >> igifile)
+	}	
         if (eerros) {
        	  print ("expand 0.5", >> igifile)
           print ("etype 1; errorbar 2; errorbar -2", >> igifile)
-	  print ("expand 1.0", >> igifile)
+	  	  print ("expand 1.0", >> igifile)
 	}
         if (cconecta)
           print ("connect", >> igifile)
@@ -527,9 +527,9 @@ begin
 	# imprimindo theta
 	#
 	if (ttheta) {
-          print ("location .075 .98 0.10 0.38", >> igifile)
-          print ("ycolumn 6", >> igifile)
-          print ("ecolumn 7", >> igifile)
+          	print ("location .075 .98 0.10 0.38", >> igifile)
+          	print ("ycolumn 6", >> igifile)
+          	print ("ecolumn 7", >> igifile)
           if (pphase) {
            print ("limits 0. 1. 0. 180. ", >> igifile)
            print ("margin 0.050", >> igifile)
@@ -544,14 +544,14 @@ begin
            }
           print ("ylabel \gq (deg)", >> igifile)
           if (ppontos) {
-	    print ("expand 0.5", >> igifile)
+	    	print ("expand 0.5", >> igifile)
             print ("points", >> igifile)
-	    print ("expand 1.0", >> igifile)
+	    	print ("expand 1.0", >> igifile)
           }
           if (eerros) {
-	    print ("expand 0.5", >> igifile)
+	    	print ("expand 0.5", >> igifile)
             print ("etype 1; errorbar 2; errorbar -2", >> igifile)
-	    print ("expand 1.0", >> igifile)
+	    	print ("expand 1.0", >> igifile)
           }
           if (cconecta)
             print ("connect", >> igifile)
@@ -587,7 +587,7 @@ begin
     if (access(tempofile)) delete(tempofile,ver-)
     if (access(diffile)) delete(diffile,ver-)
     if (arqout != "") rename(poldat,arqout,field="all")
-    # delete(poldat,ver-)
+    delete(poldat,ver-)
     
     goto fim
 erro:

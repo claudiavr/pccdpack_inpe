@@ -19,19 +19,27 @@ No IRAF V2.18, MacOS, os pacotes externos (e portanto o diretório do pccdpack) 
 
 /Applications/IRAF.app/Contents/iraf-v218/extern .
 
-No arquivo pccdpack_inpe.cl, modifique a linha abaixo para ficar de acordo com a localizacao do pccdpack_inpe:
+No arquivo pccdpack_inpe.cl, modifique a linha abaixo para ficar de acordo com a localizacao do pccdpack_inpe no seu computador:
 
 	set      pccdpack_inpe          = "/Applications/IRAF.app/Contents/iraf-v218/extern/pccdpack_inpe/"
 
-Toda a secao de "rotinas fortran" precisa ter o caminho alterado.
+Toda a secao de "rotinas fortran" do pccdpack_inpe.br precisa também ter o caminho alterado.
 
-Nova versao do IRAF: https://iraf.noirlab.edu/
+Além disso, precisam ser criados/atualizados os executáveis contidos no diretório "fortran" da distribuição. Nesse mesmo diretório, o arquivo readme.txt contém as instruções para compilação.
 
-https://arxiv.org/abs/2401.01982
+A nova versao do IRAF pode ser acessada no link https://iraf.noirlab.edu/ e é descrita no paper https://arxiv.org/abs/2401.01982 .
 
-A Claudia, usando o MacOS, só conseguir interacao com a imagem no XImtool. Isto eh, nao consegui selecionar estrelas na imagem no DS9.
+A Claudia, usando o MacOS, só conseguiu interagir com a imagem no time_pol e padrao_pol usando o XImtool. Isto eh, nao consegui selecionar estrelas na imagem usando o DS9.
 
 ## Versioning
+
+2024-08-26
+	Improvements in the instructions of the README.md file.
+
+2024-06-17
+
+	phot_pol.f corrected to print the image number with 4 algarisms
+	_
 
 2024-05-22b
 

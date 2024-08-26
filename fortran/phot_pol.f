@@ -260,8 +260,8 @@ c
 c	Saida
 c
 c
-   10 format(1i3,30e13.5) 
-   11 format(1i3,30e15.5)
+   10 format(1i4,30e13.5) 
+   11 format(1i4,30e15.5)
 c
 	do j=1,nstars+1
 	  write(8,*) "# "
